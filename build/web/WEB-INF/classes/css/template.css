@@ -1,0 +1,255 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 21 de nov de 2021, 21:55:33
+    Author     : felli
+*/
+
+html, body {
+    font-family: Segoe UI, sans-serif;
+    display: table;
+    margin: auto;
+    width: 1100px;
+}
+
+ /*
+ * Estilo do Header
+ */
+
+#header {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    padding: 0 40px;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+#header:before {
+    content:"";
+    background-color: #013771;
+    border-bottom: 5px solid #eee;
+    position: absolute;
+    height: 100px;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+#logo {
+    display: block;
+    border: 1px solid #FFF;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+
+.logo_website {
+    float: left;
+    width: 45px;
+    height: 45px;
+    padding-top: 4px;
+}
+
+#logo h1 {
+    font-size: 20px;
+    padding-left: 55px;
+}
+
+#logo a {
+    color: #FFF;
+    font-weight: bolder;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+#nav {
+    float: right;
+    display: inline;
+    margin-left: -40px;
+    margin-right: 40px;
+}
+
+#nav ul {
+    display: inline-flex;
+}
+
+#nav ul li {
+    display: inherit;
+    padding: 0 25px;
+}
+
+#nav a {
+    text-decoration: none;
+    color: #FFF;
+    font-weight: bold; 
+    padding-bottom: 2px;
+}
+
+#nav a:hover {
+    border-bottom: 1px solid #FFF;
+    padding-bottom: 2px;
+}
+
+#pesquisa {
+    display: inline;
+}
+
+.search_bar {
+    width: 250px;
+    display: inline-flex;
+    padding: 10px 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+#login {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 50px;
+}
+
+#login img {
+    float: left;
+    width: 45px;
+    height: 45px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100%;
+    margin-top: 3px;
+    margin-right: 10px;
+}
+
+#login p {
+    display: inline-flex;
+}
+
+#login p {
+    text-decoration: none;
+    color: #FFF;
+    font-weight: bold; 
+    padding-bottom: 2px;
+}
+
+#login a p:hover {
+    border-bottom: 1px solid #FFF;
+    padding-bottom: 2px;
+}
+
+/*
+* Estilo do Content
+*/
+
+#content {
+    padding: 25px 40px;
+}
+
+/*
+* Estilo do Footer
+*/
+
+/*#footer {
+    background-color: #013771;
+    border-top: 5px solid #eee;
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+}*/
+
+#footer {
+    background-color: #013771;
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+#footer:before {
+    content:"";
+    background-color: #013771;
+    border-top: 5px solid #eee;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+}
+
+#footer_note {
+    border-top: 1px solid #FFF;
+    display: inline-flex;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+#footer_note p {
+    color: #FFF;
+    font-weight: bold;
+}
+
+#brand_footer {
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.logo_footer {
+    width: 150px;
+    height: 150px;
+    position: relative;
+}
+
+#name_footer {
+    font-size: 25px;
+    position: absolute;
+    color: #FFF;
+    font-weight: bolder;
+    text-transform: uppercase;
+    margin-top: -45px;
+    margin-left: 10px;
+    border: 1px solid #FFF;
+    background: #E16927;
+    padding: 4px 10px;
+    border-radius: 5px;
+}
+
+#logo_footer a {
+    text-decoration: none;
+}
+
+#menu {
+    display: inline-flex;
+}
+
+#menu_one {
+    margin-left: 30px;
+}
+
+#menu_two {
+    margin-left: 100px;
+}
+
+#menu ul {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+#menu ul li {
+    padding: 10px 0;
+}
+
+#menu ul li a {
+    color: #FFF;
+    font-weight: bold;
+    padding-bottom: 2px;
+}
+
+#menu ul li a:hover {
+    border-bottom: 1px solid #FFF;
+    padding-bottom: 2px;
+}
