@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template ="./WEB-INF/template/template.xhtml">
+           
+            <ui:define name="main">
+                <h1>Filmes no Banco da Dados</h1>
+                <div>
+                    <h:form id="form1">
+                    <p:dataTable id="tabelafilmes" var="filme" value="#{filmeBean.allFilme}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{filme.id}" selectionMode="single" selection="#{filmeBean.selectedFilme}">
+                        <f:facet name="header">
+                Selecione uma opção e pressione deletar
+            </f:facet>
+                        <p:column headerText="ID">
+                            <h:outputText value="#{filme.id}" />
+                        </p:column>
+                        <p:column headerText="Título">
+                            <h:outputText value="#{filme.titulo}" />
+                        </p:column>
+                        <p:column headerText="Duração">
+                            <h:outputText value="#{filme.duracao}" />
+                        </p:column>
+                        <p:column headerText="Nota">
+                            <h:outputText value="#{filme.nota}" />
+                        </p:column>
+                        <p:column headerText="Resumo">
+                            <h:outputText value="#{filme.resumo}" />
+                        </p:column>
+                        <p:column headerText="Gênero">
+                            <h:outputText value="#{filme.genero}" />
+                        </p:column>
+                        <p:column headerText="Classificação">
+                            <h:outputText value="#{filme.classificacao}" />
+                        </p:column>
+                        <p:column headerText="Atores">
+                            <h:outputText value="#{filme.ator}" />
+                        </p:column>
+                                              
+                    </p:dataTable> 
+                    <p:contextMenu for="tabelafilmes">
+            <p:menuitem value="Delete" update="tabelafilmes" icon="pi pi-times"
+                        action="#{filmeBean.MoverAtualLixeira()}"/>
+            </p:contextMenu>
+                    <p:commandButton id="deletar"  title="Deletar" process="@form" action="#{filmeBean.MoverAtualLixeira()}" style="margin-left: 48% "/> 
+                </h:form>     
+                </div>
+                <h1>Cadastrar de Filme</h1>
+                <div style="display: flex; justify-content: center; margin-top: .5em;">
+                <h:form >
+                    <h:panelGrid id="painel-1" columns="2" styleClass="ui-noborder" >
+                        <h:outputLabel value="Título:" />
+                        <h:inputText value="#{filmeBean.selectedFilme.titulo}"/>
+                        
+                        <h:outputLabel value="Duração:" />
+                        <h:inputText value="#{filmeBean.selectedFilme.duracao}"/>
+                        
+                        <h:outputLabel value="Nota:" />
+                        <h:inputText value="#{filmeBean.selectedFilme.nota}"/>
+                        
+                        <h:outputLabel value="Resumo:" />
+                        <h:inputText value="#{filmeBean.selectedFilme.resumo}"/>
+                        
+                        <h:outputLabel value="Gênero:" />
+                        <h:inputText value="#{filmeBean.selectedFilme.genero}"/>
+                        
+                        <h:outputLabel value="Classificação:" />
+                        <h:inputText value="#{filmeBean.selectedFilme.classificacao}"/>
+                        
+                        <h:outputLabel value="Atores:" />
+                        <h:inputText value="#{filmeBean.selectedFilme.ator}"/>
+                        
+                    </h:panelGrid>                 
+                    <p:commandButton id="save" title="salvar" process="@form" action="#{filmeBean.salvarAtual()}"/>                 
+                </h:form>
+                 </div> 
+            </ui:define>
+           
+        </ui:composition>
+    </h:body>
+</html>
+
