@@ -7,7 +7,7 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Cadastro de Filmes</title>
     </h:head>
     <h:body>
         <ui:composition template ="./WEB-INF/template/template.xhtml">
@@ -50,40 +50,40 @@
             <p:menuitem value="Delete" update="tabelafilmes" icon="pi pi-times"
                         action="#{filmeBean.MoverAtualLixeira()}"/>
             </p:contextMenu>
-                    <p:commandButton id="deletar"  title="Deletar" process="@form" action="#{filmeBean.MoverAtualLixeira()}" style="margin-left: 48% "/> 
+                    <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar" process="@form" action="#{filmeBean.MoverAtualLixeira()}" style="margin-left: 48% "/> 
                 </h:form>     
                 </div>
                 <h1>Cadastrar de Filme</h1>
                 <div style="display: flex; justify-content: center; margin-top: .5em;">
                 <h:form >
-                    <h:panelGrid id="painel-1" columns="2" styleClass="ui-noborder" >
-                        <h:outputLabel value="Título:" />
-                        <h:inputText value="#{filmeBean.selectedFilme.titulo}"/>
+                    <p:panelGrid id="painel-1" columns="2" 
+                 >
+                        <p:outputLabel value="Título:" />
+                        <p:inputText value="#{filmeBean.selectedFilme.titulo}"/>
                         
-                        <h:outputLabel value="Duração:" />
-                        <h:inputText value="#{filmeBean.selectedFilme.duracao}"/>
+                        <p:outputLabel value="Duração:" />
+                        <p:inputNumber value="#{filmeBean.selectedFilme.duracao}"/>
                         
-                        <h:outputLabel value="Nota:" />
-                        <h:inputText value="#{filmeBean.selectedFilme.nota}"/>
+                        <p:outputLabel value="Nota:" />
+                        <p:inputNumber value="#{filmeBean.selectedFilme.nota}"/>
                         
-                        <h:outputLabel value="Resumo:" />
-                        <h:inputText value="#{filmeBean.selectedFilme.resumo}"/>
+                        <p:outputLabel value="Resumo:" />
+                        <p:inputText value="#{filmeBean.selectedFilme.resumo}"/>
                         
-                        <h:outputLabel value="Gênero:" />
-                        <h:inputText value="#{filmeBean.selectedFilme.genero}"/>
+                        <p:outputLabel value="Gênero:" />
+                        <p:inputText value="#{filmeBean.selectedFilme.genero}"/>
                         
-                        <h:outputLabel value="Classificação:" />
-                        <h:inputText value="#{filmeBean.selectedFilme.classificacao}"/>
+                        <p:outputLabel value="Classificação:" />
+                        <p:inputNumber value="#{filmeBean.selectedFilme.classificacao}"/>
                         
-                        <h:outputLabel value="Atores:" />
-                        <h:inputText value="#{filmeBean.selectedFilme.ator}"/>
+                        <p:outputLabel value="Atores:" />
+                        <p:inputText value="#{filmeBean.selectedFilme.ator}"/>
                         
-                    </h:panelGrid>                 
-                    <p:commandButton id="save" title="salvar" process="@form" action="#{filmeBean.salvarAtual()}"/>                 
+                    </p:panelGrid>                 
+                    <p:commandButton id="save" icon="pi pi-save" style="margin-left: 55%" title="salvar" process="@form" action="#{filmeBean.salvarAtual()}"/>                 
                 </h:form>
                  </div> 
             </ui:define>
-           
         </ui:composition>
     </h:body>
 </html>
