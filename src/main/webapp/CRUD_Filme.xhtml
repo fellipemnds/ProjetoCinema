@@ -50,7 +50,17 @@
             <p:menuitem value="Delete" update="tabelafilmes" icon="pi pi-times"
                         action="#{filmeBean.MoverAtualLixeira()}"/>
             </p:contextMenu>
-                    <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar" process="@form" action="#{filmeBean.MoverAtualLixeira()}" style="margin-left: 48% "/> 
+                    <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar" process="@form" action="#{filmeBean.MoverAtualLixeira()}" style="margin-left: 48% "> <p:confirm
+                            type="popup"
+                            header="Deseja realmente remover?"
+                            message="Remover?"
+                            icon="pi pi-exclamation-triangle"
+                            />
+                      </p:commandButton>
+                        <p:confirmPopup global="true">
+            <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+            <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />
+        </p:confirmPopup>
                 </h:form>     
                 </div>
                 <h1>Cadastrar de Filme</h1>
