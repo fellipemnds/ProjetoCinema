@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-BR"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" >
+    <h:head>
+        <title>Login</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/WEB-INF/template/template.xhtml">
+        <ui:define name="main">
+            <h2>Entrar: </h2>
+            <h:form>
+                <h:panelGrid columns="2">
+                                       
+                    <h:outputText value="E-mail" />
+                    <h:inputText id="email" />
+                    
+                    <h:outputText value="Senha" />
+                    <h:inputSecret id="senha" />
+                </h:panelGrid>
+                <h:commandButton value="Finalizar" />
+            </h:form>
+           <h2>Não sou cadastrado </h2>
+           <a href="cadastrar-usuario.xhtml"><h:commandButton value="Cadastrar" /></a>
+           
+        </ui:define>
+    </ui:composition>
+    </h:body>
+</html>
+
