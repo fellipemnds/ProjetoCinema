@@ -2,8 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="pt-BR"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html" >
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
         <title>Filme</title>
@@ -12,7 +15,8 @@
         <ui:composition template="./WEB-INF/template/template.xhtml">
             <ui:define name="main">
                 <div id="conteudo">
-                    <div id="detalhes_filme">
+       
+                   <div id="detalhes_filme">
                         <img class="poster" src="images/encanto_14295_home.jpg"/>   
                         <div id="info">
                             <div id="titulo">
@@ -38,8 +42,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </ui:define>
+                    </div>
+         </ui:define>
         </ui:composition>
     </h:body>
 </html>

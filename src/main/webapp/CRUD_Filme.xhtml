@@ -5,7 +5,7 @@
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:p="http://primefaces.org/ui"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">">
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Cadastro de Filmes</title>
     </h:head>
@@ -66,8 +66,7 @@
                 <h1>Cadastrar de Filme</h1>
                 <div style="display: flex; justify-content: center; margin-top: .5em;">
                 <h:form >
-                    <p:panelGrid id="painel-1" columns="2" 
-                 >
+                    <p:panelGrid id="painel-1" columns="2">
                         <p:outputLabel value="Título:" />
                         <p:inputText value="#{filmeBean.selectedFilme.titulo}"/>
                         
