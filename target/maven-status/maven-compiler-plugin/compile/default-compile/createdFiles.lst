@@ -1,2 +1,11 @@
-io\github\fellipemnds\jakartaee8\projetocinema\resources\JavaEE8Resource.class
-io\github\fellipemnds\jakartaee8\projetocinema\JAXRSConfiguration.class
+Filme\Filme.class
+Filme\FilmeConverter.class
+io\github\fellipemnds\jakartaee8\projetocinema\entity\FacesConfig.class
+Filme\FilmeBeanServiceLocal.class
+Usuario\UsuarioBeanServiceLocal.class
+Usuario\UsuarioConverter.class
+Usuario\Usuario.class
+Filme\FilmeBean.class
+Usuario\UsuarioBean.class
+Filme\FilmeBeanService.class
+Usuario\UsuarioBeanService.class
