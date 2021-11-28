@@ -15,7 +15,7 @@
         <ui:composition template="./WEB-INF/template/template.xhtml">
             <ui:define name="main">
                 <div id="conteudo">
-       
+       <!--
                    <div id="detalhes_filme">
                         <img class="poster" src="images/Encanto.jpg"/>   
                         <div id="info">
@@ -41,7 +41,33 @@
                                     esperança de sua família excepcional. </p>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
+       <h:form>           
+           <h5 style="margin-top:0">Basic</h5>
+              
+    <p:panelGrid columns="2" rendered="#{not empty filmeBean.selectedFilme}" columnClasses="label,value" >
+        <f:facet name="header">
+            <p:graphicImage url="images/#{filmeBean.selectedFilme.titulo}.jpg"/> 
+        </f:facet>
+
+        <h:outputText value="Titulo:"/>
+        <h:outputText value="#{filmeBean.selectedFilme.titulo}"/>
+
+        <h:outputText value="Classificação:"/>
+        <h:outputText value="#{filmeBean.selectedFilme.classificacao}"/>
+        
+        <h:outputText value="Resumo:"/>
+        <h:outputText value="#{filmeBean.selectedFilme.resumo}"/>
+   
+    </p:panelGrid>
+           
+           
+           
+       </h:form>
+       
+       
+       
+       
                     </div>
          </ui:define>
         </ui:composition>

@@ -23,7 +23,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name="usuario.findAll",
-            query = "select u from usuario f " + "where u.lixo = false " + "order by u.id"
+            query = "select u from usuario u " + "where u.lixo = false " + "order by u.id"
     )
     
 }

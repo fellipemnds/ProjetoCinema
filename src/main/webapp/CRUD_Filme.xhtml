@@ -16,7 +16,7 @@
                 <h1>Filmes no Banco da Dados</h1>
                 <div>
                     <h:form id="form1">
-                    <p:dataTable id="tabelafilmes" var="filme" value="#{filmeBean.allFilme}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{filme.id}" selectionMode="single" selection="#{filmeBean.selectedFilme}">
+                    <p:dataTable id="tabelafilmes" widgetVar="tabelafilmes" var="filme" value="#{filmeBean.allFilme}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{filme.id}" selectionMode="single" selection="#{filmeBean.selectedFilme}">
                         <f:facet name="header">
                 Selecione uma opção e pressione deletar
             </f:facet>
@@ -49,15 +49,16 @@
                     <p:contextMenu for="tabelafilmes">
             <p:menuitem value="Delete" update="tabelafilmes" icon="pi pi-times"
                         action="#{filmeBean.MoverAtualLixeira()}"/>
+            
             </p:contextMenu>
-                    <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar" process="@form" action="#{filmeBean.MoverAtualLixeira()}" style="margin-left: 48% "> <p:confirm
+                    <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{filmeBean.MoverAtualLixeira()}" style="margin-left: 48%" > <p:confirm
                             type="popup"
                             header="Deseja realmente remover?"
                             message="Remover?"
                             icon="pi pi-exclamation-triangle"
                             />
                       </p:commandButton>
-                        <p:confirmPopup global="true">
+                      <p:confirmPopup global="true">
             <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
             <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />
         </p:confirmPopup>
@@ -65,8 +66,8 @@
                 </div>
                 <h1>Cadastrar de Filme</h1>
                 <div style="display: flex; justify-content: center; margin-top: .5em;">
-                <h:form >
-                    <p:panelGrid id="painel-1" columns="2">
+                <h:form id="form2" >
+                    <p:panelGrid id="painel-1"  columns="2">
                         <p:outputLabel value="Título:" />
                         <p:inputText value="#{filmeBean.selectedFilme.titulo}"/>
                         

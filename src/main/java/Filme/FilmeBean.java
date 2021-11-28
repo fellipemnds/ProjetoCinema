@@ -10,6 +10,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 
@@ -20,7 +21,8 @@ import javax.inject.Inject;
  */
 @Named(value = "filmeBean")
 //@Dependent
-@ViewScoped
+//@ViewScoped
+@SessionScoped
 public class FilmeBean implements Serializable{
 
     @Inject
