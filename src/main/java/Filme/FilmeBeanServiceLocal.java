@@ -20,5 +20,7 @@ public interface FilmeBeanServiceLocal {
     public List<Filme> findAll();
 
     public void MoverLixeira(Filme filme);
+
+    Filme loadFilmeByIdWithSessoes(Long id);
     
 }

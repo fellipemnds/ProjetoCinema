@@ -108,4 +108,13 @@ public class FilmeBean implements Serializable{
         MoverLixeira(selectedFilme);
         return "CRUD_Filme?faces-redirect=true";
     }
+    public Filme LoadFilmeWithSessoes(Filme filme){
+        if (filme != null) {
+            Filme fullFilme = filmeservice.loadFilmeByIdWithSessoes(filme.getId());
+            selectedFilme = fullFilme;
+            return selectedFilme;
+        } else {
+            return null;
+        }
+    } 
 }

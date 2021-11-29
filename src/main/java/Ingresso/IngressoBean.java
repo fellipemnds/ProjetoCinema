@@ -99,6 +99,6 @@ public class IngressoBean implements Serializable{
     }
     public String MoverAtualLixeira(){
         MoverLixeira(selectedIngresso);
-        return "CRUD_Filme?faces-redirect=true";
+        return "CRUD_Ingresso?faces-redirect=true";
     }
 }

@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Table (name = "tbl_formas_pagamento")//nome da tabela
 @NamedQueries({
     @NamedQuery(
-            name="filme.findAll",
+            name="formasdepagamento.findAll",
             query = "select fp from formasdepagamento fp " + "where fp.lixo = false " + "order by fp.id"
     )
     

@@ -24,10 +24,12 @@ public class FilmeConverter implements Converter<Filme>{
     private FilmeBeanServiceLocal filmeService;
     @Override
     public Filme getAsObject(FacesContext fc, UIComponent uic, String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
+        if (id == null) {
+            return null;
+        }
+        return filmeService.loadFilmeByIdWithSessoes(Long.parseLong(id));
+                      
     }
-
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Filme filme) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

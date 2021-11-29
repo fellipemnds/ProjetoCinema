@@ -59,6 +59,16 @@ public class FilmeBeanService implements FilmeBeanServiceLocal {
         filme.setLixo(true);
         entityManager.merge(filme);
     }
+
+    @Override
+    public Filme loadFilmeByIdWithSessoes(Long id) {        
+        return entityManager
+                .createNamedQuery(
+                        "filme.loadFilmeByIdWithSessao",
+                        Filme.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
     
     
 }

@@ -5,13 +5,19 @@
  */
 package Sessao;
 
+import Filme.Filme;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -33,8 +39,7 @@ public class Sessao implements Serializable{
     private Long id;
     private String tipo;
     @Column(columnDefinition = "DATE")
-    private LocalDate data;
-    private String horario;
+    private LocalDateTime data;
     private Boolean lixo;
 
     public Long getId() {
@@ -53,20 +58,12 @@ public class Sessao implements Serializable{
         this.tipo = tipo;
     }
 
-    public LocalDate getData() {
+    public LocalDateTime getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(LocalDateTime data) {
         this.data = data;
-    }
-
-    public String getHorario() {
-        return horario;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
     }
 
     public Boolean getLixo() {
@@ -80,6 +77,18 @@ public class Sessao implements Serializable{
     public Sessao() {
         super();
         lixo= false;
+    }
+    @ManyToOne(fetch = FetchType.LAZY, // padrão
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "filme_sessao")
+    private Filme filme;
+
+    public Filme getFilme() {
+        return filme;
+    }
+
+    public void setFilme(Filme filme) {
+        this.filme = filme;
     }
     
 

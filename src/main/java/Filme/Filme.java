@@ -5,13 +5,17 @@
  */
 package Filme;
 
+import Sessao.Sessao;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,8 +28,14 @@ import javax.persistence.Table;
     @NamedQuery(
             name="filme.findAll",
             query = "select f from filme f " + "where f.lixo = false " + "order by f.id"
-    )
-    
+    ),
+ @NamedQuery(
+            name = "filme.loadFilmeByIdWithSessao",
+            query = "select distinct f from filme f "
+            + "left join fetch f.sessoes "
+            + "where f.lixo = false and f.id = :id "
+            + "order by f.id"
+    )   
 }
 )
 public class Filme implements Serializable {
@@ -114,13 +124,22 @@ public class Filme implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    /*@OneToMany(mappedBy = "filme",
+    @OneToMany(mappedBy = "filme",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<Sessao> sessoes;*/
+    private List<Sessao> sessoes;
+    
     public Filme() {
         super();
         lixo= false;
+    }
+
+    public List<Sessao> getSessoes() {
+        return sessoes;
+    }
+
+    public void setSessoes(List<Sessao> sessoes) {
+        this.sessoes = sessoes;
     }
     
 
