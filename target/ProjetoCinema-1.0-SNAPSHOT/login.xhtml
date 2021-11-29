@@ -10,23 +10,21 @@
     <h:body>
         <ui:composition template="/WEB-INF/template/template.xhtml">
         <ui:define name="main">
-            <h2>Cadastro: </h2>
+            <h2>Entrar: </h2>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputText value="Nome" />
-                    <h:inputText id="nome" />
-                    
+                                       
                     <h:outputText value="E-mail" />
                     <h:inputText id="email" />
-                    
-                    <h:outputText value="Telefone" />
-                    <h:inputText id="telefone" />
                     
                     <h:outputText value="Senha" />
                     <h:inputSecret id="senha" />
                 </h:panelGrid>
                 <h:commandButton value="Finalizar" />
             </h:form>
+           <h2>Não sou cadastrado </h2>
+           <a href="cadastrar-usuario.xhtml"><h:commandButton value="Cadastrar" /></a>
+           
         </ui:define>
     </ui:composition>
     </h:body>
