@@ -346,9 +346,23 @@ footer {
 }
 .div_sobre
 {
-    display:flex;
+    padding:12 30px;
+    display:block;
+    width:100%
+    
 }
 .paragrafo_sobre{
-    padding-right: 25px;
+    font-size:20px; 
     text-align: justify;
+    float:left;
+    width:50%;
+}
+.movie_picture{
+    width:40%;
+    display:flex;
+    float:right;
+    margin:auto;
+}
+#titulo_sobre{
+    text-align: center;
 }
