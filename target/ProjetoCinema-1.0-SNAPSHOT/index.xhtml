@@ -46,9 +46,10 @@
  
         <p:panel header="#{filme.titulo}" style="text-align:center; width: 250px ">
             <h:panelGrid columns="1" style="width:100%">
-                <p:button outcome="filme" icon="pi pi-info" includeViewParams="true">
-                <p:graphicImage url="images/#{filme.titulo}.jpg"/>               
-                </p:button>
+                <p:commandLink onclick="location.href='filme.xhtml';">
+                <p:graphicImage url="images/#{filme.titulo}.jpg"/>
+                <f:setPropertyActionListener value="#{filme}" target="#{filmeBean.selectedFilme}" />
+                </p:commandLink>
                 <p:rating readonly="true" value="#{filme.nota}"/>
  
                 <p:commandLink update=":form:filmeDetalhe" oncomplete="PF('filmeDialog').show()" title="View Detail">                    <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;"/>
