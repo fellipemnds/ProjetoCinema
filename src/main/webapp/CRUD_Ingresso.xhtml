@@ -30,7 +30,7 @@
                         action="#{ingressoBean.MoverAtualLixeira()}"/>
             
             </p:contextMenu>
-                    <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{ingressoBean.MoverAtualLixeira()}" style="margin-left: 48%" > <p:confirm
+                    <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{ingressoBean.MoverAtualLixeira()}" style="margin-left: 48%" oncomplete="#{filmeBean.reset()}"> <p:confirm
                             type="popup"
                             header="Deseja realmente remover?"
                             message="Remover?"

@@ -16,14 +16,24 @@
                 <h1>Filmes no Banco da Dados</h1>
                 <div>
                     <h:form id="form1">
-                    <p:dataTable id="tabelafilmes" widgetVar="tabelafilmes" var="filme" value="#{filmeBean.allFilme}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{filme.id}" selectionMode="single" selection="#{filmeBean.selectedFilme}">
-                        <f:facet name="header">
-                Selecione uma opção e pressione deletar
+                        <p:dataTable id="tabelafilmes" widgetVar="tabelafilmes" var="filme" value="#{filmeBean.allFilme}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{filme.id}" selectionMode="single" selection="#{filmeBean.selectedFilme}"  reflow="true" filteredValue="#{filmeBean.filteredFilme}" size="small">
+            <f:facet name="header">
+                <div id="searchfilme" class="search">
+                    <h3>Selecione uma opção e pressione deletar</h3>
+                    
+                    <span class="filter-container ui-input-icon-left" >
+                            <i class="pi pi-search" />
+                            <p:inputText 
+                                id="globalFilter" 
+                                onkeyup="PF('tabelafilmes').filter()" 
+                                placeholder="Pesquisar"/>
+                    </span>
+                </div>
             </f:facet>
                         <p:column headerText="ID">
                             <h:outputText value="#{filme.id}" />
                         </p:column>
-                        <p:column headerText="Título">
+                        <p:column headerText="Título" field="titulo"  filterStyle="display: none;">
                             <h:outputText value="#{filme.titulo}" />
                         </p:column>
                         <p:column headerText="Duração">
@@ -35,13 +45,13 @@
                         <p:column headerText="Resumo">
                             <h:outputText value="#{filme.resumo}" />
                         </p:column>
-                        <p:column headerText="Gênero">
+                        <p:column headerText="Gênero" field="genero"  filterStyle="display: none;">
                             <h:outputText value="#{filme.genero}" />
                         </p:column>
                         <p:column headerText="Classificação">
                             <h:outputText value="#{filme.classificacao}" />
                         </p:column>
-                        <p:column headerText="Atores">
+                        <p:column headerText="Atores" field="genero"  filterStyle="display: none;">
                             <h:outputText value="#{filme.ator}" />
                         </p:column>
                                               
@@ -51,13 +61,15 @@
                         action="#{filmeBean.MoverAtualLixeira()}"/>
             
             </p:contextMenu>
-                    <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{filmeBean.MoverAtualLixeira()}" style="margin-left: 48%" > <p:confirm
+                        <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{filmeBean.MoverAtualLixeira()}" style="margin-left: 48%" oncomplete="#{filmeBean.reset()}" > <p:confirm
                             type="popup"
                             header="Deseja realmente remover?"
                             message="Remover?"
                             icon="pi pi-exclamation-triangle"
                             />
                       </p:commandButton>
+                        &nbsp;
+                        <p:commandButton id="editar" title="Editar"  icon="pi pi-pencil" actionListener="#{filmeBean.LoadFilmeWithSessoes(filme)}" update=":form2:painel-1"/>  
                       <p:confirmPopup global="true">
             <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
             <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />
@@ -65,9 +77,10 @@
                 </h:form>     
                 </div>
                 <h1>Cadastrar de Filme</h1>
+                
                 <div style="display: flex; justify-content: center; margin-top: .5em;">
                 <h:form id="form2" >
-                    <p:panelGrid id="painel-1"  columns="2">
+                    <p:panelGrid id="painel-1"  columns="2" style="width: auto">
                         <p:outputLabel value="Título:" />
                         <p:inputText value="#{filmeBean.selectedFilme.titulo}"/>
                         
@@ -78,10 +91,10 @@
                         <p:inputNumber value="#{filmeBean.selectedFilme.nota}"/>
                         
                         <p:outputLabel value="Resumo:" />
-                        <p:inputText value="#{filmeBean.selectedFilme.resumo}"/>
+                        <p:inputTextarea rows="10" cols="50" value="#{filmeBean.selectedFilme.resumo}" maxlength="500"/>
                         
                         <p:outputLabel value="Gênero:" />
-                        <p:inputText value="#{filmeBean.selectedFilme.genero}"/>
+                        <p:inputText value="#{filmeBean.selectedFilme.genero}" />
                         
                         <p:outputLabel value="Classificação:" />
                         <p:inputNumber value="#{filmeBean.selectedFilme.classificacao}"/>
