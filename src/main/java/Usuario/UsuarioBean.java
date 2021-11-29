@@ -94,7 +94,7 @@ public class UsuarioBean implements Serializable{
     public String salvarAtual()
     {
         salvar(selectedUsuario);
-        return "CRUD_Usuario?faces-redirect=true";
+        return "CRUD_usuario?faces-redirect=true";
     }
     
     public List<Usuario> findAll(){
@@ -115,6 +115,6 @@ public class UsuarioBean implements Serializable{
     }
     public String MoverAtualLixeira(){
         MoverLixeira(selectedUsuario);
-        return "CRUD_Usuario?faces-redirect=true";
+        return "CRUD_usuario?faces-redirect=true";
     }
 }
