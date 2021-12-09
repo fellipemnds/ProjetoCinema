@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sessao;
+package Cartao;
 
 import java.util.List;
 import javax.ejb.Local;
@@ -13,14 +13,12 @@ import javax.ejb.Local;
  * @author PICHAU
  */
 @Local
-public interface SessaoBeanServiceLocal {
+public interface CartaoBeanServiceLocal {
 
-    void Salvar(Sessao sessao);
+    void Salvar(Cartao cartao);
 
-    List<Sessao> findAll();
+    List<Cartao> findAll();
 
-    void MoverLixeira(Sessao sessao);
-
-    Sessao findSessionById(Long sessaoId);
+    void MoverLixeira(Cartao cartao);
     
 }

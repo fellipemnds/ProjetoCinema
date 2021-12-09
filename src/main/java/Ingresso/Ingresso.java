@@ -5,13 +5,21 @@
  */
 package Ingresso;
 
+import FormasDePagamento.FormasDePagamento;
+import Sessao.Sessao;
+import Usuario.Usuario;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity (name = "ingresso")
@@ -50,6 +58,49 @@ public class Ingresso implements Serializable {
         super();
         lixo= false;
     }
+    @ManyToOne(fetch = FetchType.LAZY, // padrão
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "ingresso_sessao")
+    private Sessao sessao;
+    
+    @ManyToOne(fetch = FetchType.LAZY, // padrão
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario_ingresso")
+    private Usuario usuario;
+    
+    @OneToOne(fetch = FetchType.EAGER, // padrão
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private FormasDePagamento formasDePagamento;
+
+    public FormasDePagamento getFormasDePagamento() {
+        return formasDePagamento;
+    }
+
+    public void setFormasDePagamento(FormasDePagamento formasDePagamento) {
+        this.formasDePagamento = formasDePagamento;
+    }
+    
+    
+    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
+    
+
+    public Sessao getSessao() {
+        return sessao;
+    }
+
+    public void setSessao(Sessao sessao) {
+        this.sessao = sessao;
+    }   
+    
     
     @Override
     public int hashCode() {

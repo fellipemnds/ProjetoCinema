@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sala;
-import Sessao.Sessao;
+package Cartao;
+
+import FormasDePagamento.FormasDePagamento;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -17,40 +18,48 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-@Entity (name = "sala")
-@Table (name = "tbl_sala")//nome da tabela
+/**
+ *
+ * @author Gealisson
+ */
+@Entity(name = "cartao")
+@Table (name = "tbl_cartao")//nome da tabela
 @NamedQueries({
     @NamedQuery(
-            name="sala.findAll",
-            query = "select s from sala s " + "where s.lixo = false " + "order by s.id"
-    )
-    
+            name="cartao.findAll",
+            query = "select c from cartao c " + "where c.lixo = false " + "order by c.id"
+    ),
+ /*@NamedQuery(
+            name = "cartao.loadFilmeByIdWithSessao",
+            query = "select distinct f from filme f "
+            + "left join fetch f.sessoes "
+            + "where f.lixo = false and f.id = :id "
+            + "order by f.id"
+    )  */ 
 }
 )
-public class Sala implements Serializable{
+public class Cartao implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private int Qnt_assentos;
     private Boolean lixo;
     
-    
-    @OneToMany(mappedBy = "sala",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private List<Sessao> sessoes;
-
-    public List<Sessao> getSessoes() {
-        return sessoes;
-    }
-
-    public void setSessoes(List<Sessao> sessoes) {
-        this.sessoes = sessoes;
+    public Cartao() {
+        super();
+        lixo= false;
     }
     
+    public Boolean getLixo() {
+        return lixo;
+    }
+
+    public void setLixo(Boolean lixo) {
+        this.lixo = lixo;
+    }
     
+
     public Long getId() {
         return id;
     }
@@ -59,40 +68,34 @@ public class Sala implements Serializable{
         this.id = id;
     }
 
-    public int getQnt_assentos() {
-        return Qnt_assentos;
-    }
-
-    public void setQnt_assentos(int Qnt_assentos) {
-        this.Qnt_assentos = Qnt_assentos;
-    }
-
-    public Boolean getLixo() {
-        return lixo;
-    }
-
-    public void setLixo(Boolean lixo) {
-        this.lixo = lixo;
-    }
-    public Sala() {
-        super();
-        lixo= false;
-    }
-    
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
+    @OneToMany(mappedBy = "cartao",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<FormasDePagamento> formasDePagamentos;
+
+    public List<FormasDePagamento> getFormasDePagamentos() {
+        return formasDePagamentos;
+    }
+
+    public void setFormasDePagamentos(List<FormasDePagamento> formasDePagamentos) {
+        this.formasDePagamentos = formasDePagamentos;
+    }
+    
+    
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Sala)) {
+        if (!(object instanceof Cartao)) {
             return false;
         }
-        Sala other = (Sala) object;
+        Cartao other = (Cartao) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -101,7 +104,7 @@ public class Sala implements Serializable{
 
     @Override
     public String toString() {
-        return "io.github.fellipemnds.jakartaee8.projetocinema.Sala[ id=" + id + " ]";
+        return "Cartao.Cartao[ id=" + id + " ]";
     }
     
 }

@@ -5,7 +5,8 @@
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:p="http://primefaces.org/ui"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Cadastro de Filmes</title>
     </h:head>
@@ -51,9 +52,17 @@
                         <p:column headerText="Classificação">
                             <h:outputText value="#{filme.classificacao}" />
                         </p:column>
-                        <p:column headerText="Atores" field="genero"  filterStyle="display: none;">
+                        <p:column headerText="Atores" field="atores"  filterStyle="display: none;">
                             <h:outputText value="#{filme.ator}" />
                         </p:column>
+                      <p:column headerText="Sessões" filterStyle="display: none;">
+                          <c:forEach items="#{filmeBean.LoadFilmeWithSessoes(filme).sessoes}" var="item">
+                             <h:outputText value="#{item}" />
+                          </c:forEach>   
+                        <!-- <p:dataList value="#{filmeBean.LoadFilmeWithSessoes(filme).sessoes}" var="item" itemType="none">
+                              <h:outputText value="#{item}" />                          
+                          </p:dataList>    -->
+                        </p:column>   
                                               
                     </p:dataTable> 
                     <p:contextMenu for="tabelafilmes">
@@ -102,8 +111,27 @@
                         <p:outputLabel value="Atores:" />
                         <p:inputText value="#{filmeBean.selectedFilme.ator}"/>
                         
+                      <p:outputLabel value="Sessões:" />
+                        <p:scrollPanel
+                            style="max-height: 10em;">
+                            <p:selectManyCheckbox
+                                id="sessoes"
+                                value="#{filmeBean.selectedFilme.sessoes}"
+                                converter="sessaoConverter"
+                                layout="pageDirection" >
+                                <f:selectItems
+                                    value="#{sessaoBean.allSessao}"
+                                    var="sessao"
+                                    itemLabel="#{sessao.data}"
+                                    itemValue="#{sessao}" />
+                                <f:attribute 
+                                    name="collectionType" 
+                                    value="java.util.ArrayList" />
+                            </p:selectManyCheckbox>
+                        </p:scrollPanel>                        
+                        
                     </p:panelGrid>                 
-                    <p:commandButton id="save" icon="pi pi-save" style="margin-left: 55%" title="salvar" process="@form" action="#{filmeBean.salvarAtual()}"/>                 
+                    <p:commandButton id="save" icon="pi pi-save" style="margin-left: 55%" title="salvar" process="@form" action="#{filmeBean.salvarAtual()}" update=":form1:tabelafilmes"/>                 
                 </h:form>
                  </div> 
             </ui:define>

@@ -26,11 +26,11 @@ public class SessaoBeanService implements SessaoBeanServiceLocal {
     public void Salvar(Sessao sessao) {
         if (entityManager.contains(sessao)) {
             // Update attached -- Ever used??
-            System.out.println("TaskServiceBean::save[U].task => " + sessao);
+            System.out.println("SessaoServiceBean::save[U].task => " + sessao);
             entityManager.persist(sessao);
         } else if (sessao.getId() != null) {
             // Detached entity
-            System.out.println("TaskServiceBean::save[U'].task => " + sessao);
+            System.out.println("SessaoServiceBean::save[U'].task => " + sessao);
             entityManager.merge(sessao);
         } else {
             // Create new
@@ -57,6 +57,16 @@ public class SessaoBeanService implements SessaoBeanServiceLocal {
     public void MoverLixeira(Sessao sessao) {
         sessao.setLixo(true);
         entityManager.merge(sessao);
+    }
+
+    @Override
+    public Sessao findSessionById(Long sessaoId) {
+         return entityManager
+                .createNamedQuery(
+                        "sessao.findSessaoById",
+                        Sessao.class)
+                .setParameter("id", sessaoId)
+                .getSingleResult();
     }
     
     

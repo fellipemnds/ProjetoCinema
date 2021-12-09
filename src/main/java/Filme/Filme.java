@@ -7,8 +7,10 @@ package Filme;
 
 import Sessao.Sessao;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,7 +47,7 @@ public class Filme implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
-    private int duracao;
+    private int duracao;    
     private int nota;
     private String resumo;
     private String genero;
@@ -124,6 +126,7 @@ public class Filme implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    @Column(nullable = true)
     @OneToMany(mappedBy = "filme",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
@@ -132,6 +135,7 @@ public class Filme implements Serializable {
     public Filme() {
         super();
         lixo= false;
+        sessoes= new ArrayList<>();
     }
 
     public List<Sessao> getSessoes() {
@@ -141,7 +145,7 @@ public class Filme implements Serializable {
     public void setSessoes(List<Sessao> sessoes) {
         this.sessoes = sessoes;
     }
-    
+      
 
     @Override
     public int hashCode() {
@@ -165,7 +169,7 @@ public class Filme implements Serializable {
 
     @Override
     public String toString() {
-        return "io.github.fellipemnds.jakartaee8.projetocinema.Filme[ id=" + id + " ]";
+        return "Filme[ id=" + id +"titulo:"+titulo+"sessoes:"+sessoes+ "]";
     }
     
 }

@@ -26,11 +26,11 @@ public class FilmeBeanService implements FilmeBeanServiceLocal {
     public void Salvar(Filme filme) {
         if (entityManager.contains(filme)) {
             // Update attached -- Ever used??
-            System.out.println("TaskServiceBean::save[U].task => " + filme);
+            System.out.println("FilmeServiceBean::save[U].task => " + filme);
             entityManager.persist(filme);
         } else if (filme.getId() != null) {
             // Detached entity
-            System.out.println("TaskServiceBean::save[U'].task => " + filme);
+            System.out.println("FilmeServiceBean::save[U'].task => " + filme);
             entityManager.merge(filme);
         } else {
             // Create new

@@ -6,9 +6,13 @@
 package Sessao;
 
 import Filme.Filme;
+import Ingresso.Ingresso;
+import Sala.Sala;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +24,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity (name = "sessao")
@@ -28,7 +33,14 @@ import javax.persistence.Table;
     @NamedQuery(
             name="sessao.findAll",
             query = "select s from sessao s " + "where s.lixo = false " + "order by s.id"
-    )
+    ),
+     @NamedQuery(
+            name = "sessao.findSessaoById",
+            query = "select s from sessao s "
+                        + "left join fetch s.filme "
+            + "where s.lixo = false and s.id = :id "
+            + "order by s.data"
+    )    
     
 }
 )
@@ -38,7 +50,7 @@ public class Sessao implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tipo;
-    @Column(columnDefinition = "DATE")
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime data;
     private Boolean lixo;
 
@@ -77,11 +89,42 @@ public class Sessao implements Serializable{
     public Sessao() {
         super();
         lixo= false;
+        ingressos = new ArrayList<>();
     }
+
     @ManyToOne(fetch = FetchType.LAZY, // padrão
             cascade = CascadeType.ALL)
-    @JoinColumn(name = "filme_sessao")
+    @JoinColumn(name = "filme_id")
     private Filme filme;
+    
+
+    @ManyToOne(fetch = FetchType.LAZY, // padrão
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "sala_id")
+    private Sala sala;
+    
+    @Column(nullable = true)
+    @OneToMany(mappedBy = "sessao",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Ingresso> ingressos;
+
+    public List<Ingresso> getIngressos() {
+        return ingressos;
+    }
+
+    public void setIngressos(List<Ingresso> ingressos) {
+        this.ingressos = ingressos;
+    }
+
+    public Sala getSala() {
+        return sala;
+    }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
+    }
+    
 
     public Filme getFilme() {
         return filme;

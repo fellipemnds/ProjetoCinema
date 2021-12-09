@@ -5,13 +5,20 @@
  */
 package FormasDePagamento;
 
+import Cartao.Cartao;
+import Ingresso.Ingresso;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -67,7 +74,35 @@ public class FormasDePagamento implements Serializable {
         super();
         setLixo(false);
     }
-  
+    @OneToOne(fetch = FetchType.EAGER, // padrão
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Ingresso ingresso;
+    
+    @ManyToOne(fetch = FetchType.LAZY, // padrão
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "pagamento_cartao")
+    private Cartao cartao;
+
+    public Cartao getCartao() {
+        return cartao;
+    }
+
+    public void setCartao(Cartao cartao) {
+        this.cartao = cartao;
+    }
+
+    public Ingresso getIngresso() {
+        return ingresso;
+    }
+
+    public void setIngresso(Ingresso ingresso) {
+        this.ingresso = ingresso;
+    }
+    
+    
+    
+    
 
     @Override
     public boolean equals(Object object) {
