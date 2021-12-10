@@ -47,7 +47,17 @@ import javax.persistence.Table;
                         //+ "inner join s.filme "
             + "where s.lixo = false and s.filme.id = :id "
             //+ "order by s.id"
-    ) 
+    ),
+    @NamedQuery(
+            name = "sessao.findFilmeBySessao",
+            query = "select s.filme from sessao s "
+                        //+ "inner join s.filme f"
+            + "where s.lixo = false and s.filme.id = :id "
+            //+ "order by s.id"
+    )
+    
+    
+    
     
 }
 )

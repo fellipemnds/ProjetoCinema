@@ -5,6 +5,7 @@
  */
 package Sessao;
 
+import Filme.Filme;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -77,6 +78,16 @@ public class SessaoBeanService implements SessaoBeanServiceLocal {
                         Sessao.class)
                 .setParameter("id", id)
                 .getResultList();
+    }
+
+    @Override
+    public Filme findFilmeBySessao(Long id) {
+        return entityManager
+                .createNamedQuery(
+                        "sessao.findFilmeBySessao",
+                        Filme.class)
+                .setParameter("id", id)
+                .getSingleResult();
     }
     
     

@@ -5,6 +5,7 @@
  */
 package Sessao;
 
+import Filme.Filme;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -24,5 +25,7 @@ public interface SessaoBeanServiceLocal {
     Sessao findSessionById(Long sessaoId);
 
     List<Sessao> findSessaoByFilme(Long filmeId);
+
+    Filme findFilmeBySessao(Long id);
     
 }

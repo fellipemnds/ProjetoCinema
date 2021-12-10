@@ -117,7 +117,7 @@ public class SessaoBean implements Serializable{
             List<Sessao> sessaofull = new ArrayList<>();
             sessaofull = sessaoservice.findSessaoByFilme(filme.getId());
             sessaobyfime = sessaofull;
-            System.out.println(sessaofull);
+            //System.out.println(sessaofull);
             return sessaobyfime;
         }else {
             System.out.println("Nulo");
@@ -126,5 +126,22 @@ public class SessaoBean implements Serializable{
         
         
     }
+    public Filme findFilmeBySessao(Sessao sessao){
+        if(sessao!=null){
+            Filme filme = sessaoservice.findFilmeBySessao(sessao.getFilme().getId());
+            return filme;
+            
+        }else {
+            System.out.println("Nulo");
+            return null;
+        }        
+        
+        
+        
+        
+    }
+    
+    
+    
     
 }

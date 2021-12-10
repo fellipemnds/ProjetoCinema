@@ -56,13 +56,11 @@
                             <h:outputText value="#{filme.ator}" />
                         </p:column>
                       <p:column headerText="Sessões" style="width: 15%">                        
-                          <p:dataList value="#{sessaoBean.findSessionByFilme(filme)}" var="item" rows="#{item.size}"  type="definition">
-                              <p:dataViewListItem>
-                              <h:outputText id="data" value="#{item.data}" >
-                                  <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />                             
-                              </h:outputText>
-                              </p:dataViewListItem>
-                          </p:dataList>
+                          <ui:repeat  value="#{sessaoBean.findSessionByFilme(filme)}" var="item" >
+                                <h:outputText id="data" value="#{item.data}"  >
+                                  <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />                           
+                              </h:outputText><br/>
+                            </ui:repeat>
                         </p:column>   
                                               
                     </p:dataTable> 

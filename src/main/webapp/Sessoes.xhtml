@@ -3,19 +3,74 @@
 <html lang="pt-BR"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Sessões</title>
     </h:head>
     <h:body>
         <ui:composition template ="./WEB-INF/template/template.xhtml">
             <ui:define name="main">
+                <h:form>
+                <div id="emCartaz">
+                    <p:carousel id="sessoes" value="#{sessaoBean.allSessao}" var="sessao" circular="true" autoplayInterval="3000" numVisible="4" numScroll="1" style="width: 48%">  
+                        <f:facet name="header">
+                            <h1>Em cartaz</h1>
+                        </f:facet>
+                    <div >
                 <div>
-                    <h1>Em cartaz:</h1> 
+                   <div class="p-mb-3">
+                        <p:graphicImage url="images/#{sessaoBean.findFilmeBySessao(sessao).titulo}.jpg" styleClass="product-image"/>
+                    </div>
+                    <div>
+                        <h3 class="p-mb-1">#{sessaoBean.findFilmeBySessao(sessao).titulo}</h3>
+                        <div class="p-mb-1">
+                            <h6>Sessões:</h6>                        
+                            <ui:repeat  value="#{sessaoBean.findSessionByFilme(sessao.filme)}" var="item" >
+                                <h:outputText id="data" value="#{item.data}"  >
+                                  <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />                           
+                              </h:outputText><br/>
+                            </ui:repeat>
+                        
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</p:carousel>
                     
                 </div>
+                </h:form>        
                 <div>
-                    <h1>Estreias:</h1> 
+                    <p:carousel id="sessoes" value="#{sessaoBean.allSessao}" var="sessao" circular="true" autoplayInterval="2500" numVisible="4" numScroll="1" style="width: 48%">  
+                        <f:facet name="header">
+                            <h1>Estreias</h1>
+                        </f:facet>
+                    <div >
+                <div>
+                   <div class="p-mb-3">
+                        <p:graphicImage url="images/#{sessaoBean.findFilmeBySessao(sessao).titulo}.jpg" styleClass="product-image"/>
+                    </div>
+                    <div>
+                        <h3 class="p-mb-1">#{sessaoBean.findFilmeBySessao(sessao).titulo}</h3>
+                        <div class="p-mb-1">
+                            <h6>Sessões:</h6>                        
+                            <ui:repeat  value="#{sessaoBean.findSessionByFilme(sessao.filme)}" var="item" >
+                                <h:outputText id="data" value="#{item.data}"  >
+                                  <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />                           
+                              </h:outputText><br/>
+                            </ui:repeat>
+                        
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</p:carousel>
                     
                 </div>
             </ui:define>                  
