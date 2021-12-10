@@ -17,7 +17,7 @@
                 <h1>Filmes no Banco da Dados</h1>
                 <div>
                     <h:form id="form1">
-                        <p:dataTable id="tabelafilmes" widgetVar="tabelafilmes" var="filme" value="#{filmeBean.allFilme}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{filme.id}" selectionMode="single" selection="#{filmeBean.selectedFilme}"  reflow="true" filteredValue="#{filmeBean.filteredFilme}" size="small">
+                        <p:dataTable id="tabelafilmes" widgetVar="tabelafilmes" var="filme" value="#{filmeBean.allFilme}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{filme.id}" selectionMode="single" selection="#{filmeBean.selectedFilme}"  reflow="true" filteredValue="#{filmeBean.filteredFilme}" size="small" style="width: auto">
             <f:facet name="header">
                 <div id="searchfilme" class="search">
                     <h3>Selecione uma opção e pressione deletar</h3>
@@ -55,13 +55,14 @@
                         <p:column headerText="Atores" field="atores"  filterStyle="display: none;">
                             <h:outputText value="#{filme.ator}" />
                         </p:column>
-                      <p:column headerText="Sessões" filterStyle="display: none;">
-                          <c:forEach items="#{filmeBean.LoadFilmeWithSessoes(filme).sessoes}" var="item">
-                             <h:outputText value="#{item}" />
-                          </c:forEach>   
-                        <!-- <p:dataList value="#{filmeBean.LoadFilmeWithSessoes(filme).sessoes}" var="item" itemType="none">
-                              <h:outputText value="#{item}" />                          
-                          </p:dataList>    -->
+                      <p:column headerText="Sessões" style="width: 15%">                        
+                          <p:dataList value="#{sessaoBean.findSessionByFilme(filme)}" var="item" rows="#{item.size}"  type="definition">
+                              <p:dataViewListItem>
+                              <h:outputText id="data" value="#{item.data}" >
+                                  <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />                             
+                              </h:outputText>
+                              </p:dataViewListItem>
+                          </p:dataList>
                         </p:column>   
                                               
                     </p:dataTable> 
@@ -89,7 +90,7 @@
                 
                 <div style="display: flex; justify-content: center; margin-top: .5em;">
                 <h:form id="form2" >
-                    <p:panelGrid id="painel-1"  columns="2" style="width: auto">
+                    <p:panelGrid id="painel-1"  columns="2" style="width: auto" >
                         <p:outputLabel value="Título:" />
                         <p:inputText value="#{filmeBean.selectedFilme.titulo}"/>
                         

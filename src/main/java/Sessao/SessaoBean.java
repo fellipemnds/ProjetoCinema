@@ -5,7 +5,10 @@
  */
 package Sessao;
 
+import Filme.Filme;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -24,7 +27,15 @@ public class SessaoBean implements Serializable{
     private Long selectedSessaoId;
     private List<Sessao> allSessao;
     private List<Sessao> filteredSessao;
-   
+   private List<Sessao> sessaobyfime;
+
+    public List<Sessao> getSessaobyfime() {
+        return sessaobyfime;
+    }
+
+    public void setSessaobyfime(List<Sessao> sessaobyfime) {
+        this.sessaobyfime = sessaobyfime;
+    }
    
     public SessaoBean() {
     }
@@ -101,6 +112,19 @@ public class SessaoBean implements Serializable{
         MoverLixeira(selectedSessao);
         return "CRUD_Sessao?faces-redirect=true";
     }
-    
+    public List<Sessao> findSessionByFilme(Filme filme){
+        if(filme!=null){
+            List<Sessao> sessaofull = new ArrayList<>();
+            sessaofull = sessaoservice.findSessaoByFilme(filme.getId());
+            sessaobyfime = sessaofull;
+            System.out.println(sessaofull);
+            return sessaobyfime;
+        }else {
+            System.out.println("Nulo");
+            return null;
+        }
+        
+        
+    }
     
 }

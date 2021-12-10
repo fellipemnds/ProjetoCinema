@@ -69,6 +69,17 @@ public class FilmeBeanService implements FilmeBeanServiceLocal {
                 .setParameter("id", id)
                 .getSingleResult();
     }
+
+    @Override
+    public Filme loadFilmeWithSessao(Long id) {
+        return entityManager
+                .createNamedQuery(
+                        "filme.loadFilmeWithSession",
+                        Filme.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+    
     
     
 }

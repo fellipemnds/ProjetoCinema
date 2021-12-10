@@ -22,5 +22,7 @@ public interface SessaoBeanServiceLocal {
     void MoverLixeira(Sessao sessao);
 
     Sessao findSessionById(Long sessaoId);
+
+    List<Sessao> findSessaoByFilme(Long filmeId);
     
 }

@@ -68,6 +68,16 @@ public class SessaoBeanService implements SessaoBeanServiceLocal {
                 .setParameter("id", sessaoId)
                 .getSingleResult();
     }
+
+    @Override
+    public List<Sessao> findSessaoByFilme(Long id) {
+        return entityManager
+                .createNamedQuery(
+                        "sessao.findSessaoByFilme",
+                        Sessao.class)
+                .setParameter("id", id)
+                .getResultList();
+    }
     
     
     

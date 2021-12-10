@@ -40,7 +40,14 @@ import javax.persistence.Table;
                         + "left join fetch s.filme "
             + "where s.lixo = false and s.id = :id "
             + "order by s.data"
-    )    
+    ),
+    @NamedQuery(
+            name = "sessao.findSessaoByFilme",
+            query = "select s from sessao s "
+                        //+ "inner join s.filme "
+            + "where s.lixo = false and s.filme.id = :id "
+            //+ "order by s.id"
+    ) 
     
 }
 )
@@ -157,6 +164,6 @@ public class Sessao implements Serializable{
 
     @Override
     public String toString() {
-        return "io.github.fellipemnds.jakartaee8.projetocinema.Sessao[ id=" + id + " ]";
+        return "Sessao[ id=" + id +" tipo: "+tipo + " data:"+ data +" ]";
     }
 }

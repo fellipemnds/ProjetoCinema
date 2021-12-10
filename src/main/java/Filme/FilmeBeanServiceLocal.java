@@ -22,5 +22,7 @@ public interface FilmeBeanServiceLocal {
     public void MoverLixeira(Filme filme);
 
     Filme loadFilmeByIdWithSessoes(Long id);
+
+    Filme loadFilmeWithSessao(Long id);
     
 }

@@ -7,8 +7,10 @@ package Filme;
 
 import Sessao.Sessao;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +39,17 @@ import javax.persistence.Table;
             + "left join fetch f.sessoes "
             + "where f.lixo = false and f.id = :id "
             + "order by f.id"
-    )   
+    ),
+ @NamedQuery(
+         name = "filme.loadFilmeWithSession",
+         query = "select distinct F,s.data from filme f "
+         + "left join fetch f.sessoes s "
+         + "where f.lixo = false and f.id = :id "
+         + "order by f.id"
+         
+ 
+ )
+        
 }
 )
 public class Filme implements Serializable {
@@ -145,7 +157,20 @@ public class Filme implements Serializable {
     public void setSessoes(List<Sessao> sessoes) {
         this.sessoes = sessoes;
     }
-      
+    
+    public String allocatedSesseoes() {
+        if (!sessoes.isEmpty()) {
+            return sessoes
+                    .stream()
+                    .filter(p -> p != null) // TODO Necessary?
+                    .map(p -> p.getData().toString()).collect(Collectors
+                            .joining(", ", "[ ", " ]"));
+        } else {
+            return null;
+        }
+    }
+    
+    
 
     @Override
     public int hashCode() {

@@ -116,5 +116,17 @@ public class FilmeBean implements Serializable{
         } else {
             return null;
         }
-    } 
+    }
+    public Filme LoadFilmeSessao(Filme filme){
+        if (filme != null) {
+            Filme fullFilme = filmeservice.loadFilmeWithSessao(filme.getId());
+            selectedFilme = fullFilme;
+            return selectedFilme;
+        } else {
+            return null;
+        }
+        
+        
+        
+    }
 }
