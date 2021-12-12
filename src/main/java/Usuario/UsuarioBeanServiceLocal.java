@@ -19,5 +19,7 @@ public interface UsuarioBeanServiceLocal {
     public List<Usuario> findAll();
 
     public void MoverLixeira(Usuario usuario);
+
+    Usuario loadUsuarioWithIngressos(Long id);
     
 }

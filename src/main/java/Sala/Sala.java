@@ -24,8 +24,14 @@ import javax.persistence.Table;
     @NamedQuery(
             name="sala.findAll",
             query = "select s from sala s " + "where s.lixo = false " + "order by s.id"
-    )
-    
+    ),
+     @NamedQuery(
+            name = "sala.loadSalaWithSessoes",
+            query = "select distinct s from sala s "
+            + "left join fetch s.sessoes "
+            + "where s.lixo = false and s.id = :id "
+            + "order by s.id"
+     )
 }
 )
 public class Sala implements Serializable{

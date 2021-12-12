@@ -59,6 +59,17 @@ public class CartaoBeanService implements CartaoBeanServiceLocal {
         cartao.setLixo(true);
         entityManager.merge(cartao);
     }
+
+    @Override
+    public Cartao findCartaoByID(Long id) {
+        return entityManager
+                .createNamedQuery(
+                        "cartao.findCartaoByID",
+                        Cartao.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+    
     
     
 }

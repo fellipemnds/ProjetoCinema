@@ -24,12 +24,10 @@ public class CartaoConverter implements Converter<Cartao>{
     private CartaoBeanServiceLocal cartaoService;
     @Override
     public Cartao getAsObject(FacesContext fc, UIComponent uic, String id) {
-        /*if (id == null) {
+      if (id == null) {
             return null;
         }
-        return cartaoService.loadCartaoByIdWithSessoes(Long.parseLong(id));*/
-        
-        throw new UnsupportedOperationException("Not supported yet.");
+        return cartaoService.findCartaoByID(Long.parseLong(id));         
                       
     }
     @Override

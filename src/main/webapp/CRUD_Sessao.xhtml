@@ -18,16 +18,28 @@
                     <h:form id="form1">
                     <p:dataTable id="tabelasessao" widgetVar="tabelasessao" var="sessao" value="#{sessaoBean.allSessao}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{sessao.id}" selectionMode="single" selection="#{sessaoBean.selectedSessao}">
                         <f:facet name="header">
-                Selecione uma opção e pressione deletar
+                <div id="searchfilme" class="search">
+                    <span>Selecione uma opção e pressione deletar ou clique com o botão direito</span>
+                    
+                    <span class="filter-container ui-input-icon-left"  style="margin-left: 550px">
+                            <i class="pi pi-search" />
+                            <p:inputText 
+                                id="globalFilter" 
+                                onkeyup="PF('tabelasessao').filter()" 
+                                placeholder="Pesquisar"/>
+                    </span>
+                </div>
             </f:facet>
                         <p:column headerText="ID">
                             <h:outputText value="#{sessao.id}" />
                         </p:column>
-                        <p:column headerText="Tipo">
+                        <p:column headerText="Tipo" field="tipo" filterStyle="display: none;">
                             <h:outputText value="#{sessao.tipo}" />
                         </p:column>
-                        <p:column headerText="Data e Horário">
-                            <h:outputText value="#{sessao.data}" />
+                        <p:column headerText="Data e Horário" field="data" filterStyle="display: none;">
+                            <h:outputText id="data" value="#{sessao.data}"  >
+                                  <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />                           
+                              </h:outputText><br/>
                         </p:column>
                                                                       
                     </p:dataTable> 
@@ -36,13 +48,15 @@
                         action="#{sessaoBean.MoverAtualLixeira()}"/>
             
             </p:contextMenu>
-                    <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{sessaoBean.MoverAtualLixeira()}" style="margin-left: 48%" oncomplete="#{filmeBean.reset()}"> <p:confirm
+                    <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{sessaoBean.MoverAtualLixeira()}" style="margin-left: 48%" oncomplete="#{sessaoBean.reset()}"> <p:confirm
                             type="popup"
                             header="Deseja realmente remover?"
                             message="Remover?"
                             icon="pi pi-exclamation-triangle"
                             />
                       </p:commandButton>
+                        &nbsp;
+                        <p:commandButton id="editar" title="Editar"  icon="pi pi-pencil" actionListener="#{sessaoBean.loadSessao(sessao)}" update=":form2:painel-1"/>
                       <p:confirmPopup global="true">
             <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
             <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />

@@ -32,8 +32,10 @@ public class FilmeBean implements Serializable{
     private Long selectedFilmeId;
     private List<Filme> allFilme;
     private List<Filme> filteredFilme;
+   
     
     public FilmeBean() {
+        
     }
     @PostConstruct
     public void init(){
@@ -41,7 +43,6 @@ public class FilmeBean implements Serializable{
             selectedFilme = new Filme();
         }
     }
-
     public Filme getSelectedFilme() {
         return selectedFilme;
     }
@@ -125,8 +126,6 @@ public class FilmeBean implements Serializable{
         } else {
             return null;
         }
-        
-        
-        
     }
+    
 }

@@ -16,5 +16,7 @@ public interface SalaBeanServiceLocal {
     List<Sala> findAll();
 
     void MoverLixeira(Sala sala);
+
+    Sala loadSalaWithSessao(Long id);
     
 }

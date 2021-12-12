@@ -19,4 +19,6 @@ public interface FormasDePagamentoBeanServiceLocal  {
     public List<FormasDePagamento> findAll();
 
     public void MoverLixeira(FormasDePagamento formaDePagamento);
+
+    FormasDePagamento loadFdePagamentos(Long id);
 }

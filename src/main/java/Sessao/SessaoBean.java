@@ -135,12 +135,21 @@ public class SessaoBean implements Serializable{
             System.out.println("Nulo");
             return null;
         }        
+ 
         
+    }
+    public Sessao loadSessao(Sessao sessao){
+        if(sessao!=null){
+            Sessao sessaofull = sessaoservice.findSessionById(sessao.getId());
+            selectedSessao = sessaofull;
+            return selectedSessao;
+        }else{
+            return null;
+        }
         
         
         
     }
-    
     
     
     

@@ -20,5 +20,7 @@ public interface CartaoBeanServiceLocal {
     List<Cartao> findAll();
 
     void MoverLixeira(Cartao cartao);
+
+    Cartao findCartaoByID(Long id);
     
 }

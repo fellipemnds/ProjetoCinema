@@ -10,6 +10,7 @@ import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 /**
@@ -17,7 +18,7 @@ import javax.inject.Inject;
  * @author Gealisson
  */
 @Named(value = "cartaoBean")
-@ViewScoped
+@SessionScoped
 public class CartaoBean implements Serializable {
 
     @Inject

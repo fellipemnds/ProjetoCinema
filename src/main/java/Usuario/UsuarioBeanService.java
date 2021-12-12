@@ -48,4 +48,16 @@ public class UsuarioBeanService implements UsuarioBeanServiceLocal {
         usuario.setLixo(true);
         entityManager.merge(usuario);
     }
+
+    @Override
+    public Usuario loadUsuarioWithIngressos(Long id) { 
+        return entityManager
+                .createNamedQuery(
+                        "usuario.loadUsuarioWithIngressos",
+                        Usuario.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+    
+    
 }

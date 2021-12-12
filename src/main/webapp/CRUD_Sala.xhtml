@@ -18,12 +18,22 @@
                     <h:form id="form1">
                     <p:dataTable id="tabelasalas" widgetVar="tabelasalas" var="sala" value="#{salaBean.allSala}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{sala.id}" selectionMode="single" selection="#{salaBean.selectedSala}">
                         <f:facet name="header">
-                Selecione uma opção e pressione deletar
+                <div id="searchfilme" class="search">
+                    <span>Selecione uma opção e pressione deletar ou clique com o botão direito</span>
+                    
+                    <span class="filter-container ui-input-icon-left"  style="margin-left: 550px">
+                            <i class="pi pi-search" />
+                            <p:inputText 
+                                id="globalFilter" 
+                                onkeyup="PF('tabelasalas').filter()" 
+                                placeholder="Pesquisar"/>
+                    </span>
+                </div>
             </f:facet>
                         <p:column headerText="ID">
                             <h:outputText value="#{sala.id}" />
                         </p:column>
-                        <p:column headerText="Quantidade de Assentos">
+                        <p:column headerText="Quantidade de Assentos" field="qnt_assentos" filterStyle="display: none;">
                             <h:outputText value="#{sala.qnt_assentos}" />
                         </p:column>                        
                                               
@@ -40,6 +50,8 @@
                             icon="pi pi-exclamation-triangle"
                             />
                       </p:commandButton>
+                        &nbsp;
+                        <p:commandButton id="editar" title="Editar"  icon="pi pi-pencil" actionListener="#{salaBean.LoadSalaWithSessoes(sala)}" update=":form2:painel-1"/> 
                       <p:confirmPopup global="true">
             <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
             <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />

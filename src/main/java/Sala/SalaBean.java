@@ -101,5 +101,15 @@ public class SalaBean implements Serializable{
         MoverLixeira(selectedSala);
         return "CRUD_Sala?faces-redirect=true";
     }
+    public Sala LoadSalaWithSessoes(Sala sala){
+        if (sala != null) {
+            Sala fullSala = salaservice.loadSalaWithSessao(sala.getId());
+            selectedSala = fullSala;
+            return selectedSala;
+        } else {
+            return null;
+        }
+    }
+    
     
 }

@@ -54,6 +54,18 @@ public class SalaBeanService implements SalaBeanServiceLocal {
         sala.setLixo(true);
         entityManager.merge(sala);
     }
+
+    @Override
+    public Sala loadSalaWithSessao(Long id) {
+        return entityManager
+                .createNamedQuery(
+                        "sala.loadSalaWithSessoes",
+                        Sala.class)
+                .setParameter("id", id)
+                .getSingleResult();       
+        
+        
+    }
     
     
     

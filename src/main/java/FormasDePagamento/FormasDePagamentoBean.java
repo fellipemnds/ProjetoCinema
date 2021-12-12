@@ -16,7 +16,7 @@ import javax.inject.Named;
  *
  * @author matec
  */
-@Named(value = "fPagamentoBean")
+@Named(value = "formasDePagamentoBean")
 //@Dependent
 @ViewScoped
 public class FormasDePagamentoBean implements Serializable{
@@ -118,7 +118,22 @@ public class FormasDePagamentoBean implements Serializable{
         reloadFormasDePagamentos();
         return null;
     }
-    
+    public String MoverAtualLixeira(){
+        MoverLixeira(selectedFormasDePagamento);
+        return "CRUD_FormasDePagamento?faces-redirect=true";
+    }
+    public FormasDePagamento loadFdP(FormasDePagamento formadepagamento){
+        if(formadepagamento!=null){
+            FormasDePagamento FdPagmt = FormasDePagamentoservice.loadFdePagamentos(formadepagamento.getId());
+            selectedFormasDePagamento = FdPagmt;
+            System.out.println("FDP: "+selectedFormasDePagamento);
+            return selectedFormasDePagamento;
+        }else{
+            return null;
+        }
+        
+        
+    }
     
     
 }

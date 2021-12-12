@@ -16,23 +16,33 @@
                 <h1>Filmes no Banco da Dados</h1>
                 <div>
                     <h:form id="form1">
-                        <p:dataTable id="tabelausuarios" widgetVar="tabelafilmes" var="usuario" value="#{usuarioBean.allUsuario}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{usuario.id}" selectionMode="single" selection="#{usuarioBean.selectedUsuario}">
+                        <p:dataTable id="tabelausuarios" widgetVar="tabelausuarios" var="usuario" value="#{usuarioBean.allUsuario}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{usuario.id}" selectionMode="single" selection="#{usuarioBean.selectedUsuario}">
                         <f:facet name="header">
-                Selecione uma opção e pressione deletar
+                <div id="searchfilme" class="search">
+                    <span>Selecione uma opção e pressione deletar ou clique com o botão direito</span>
+                    
+                    <span class="filter-container ui-input-icon-left"  style="margin-left: 550px">
+                            <i class="pi pi-search" />
+                            <p:inputText 
+                                id="globalFilter" 
+                                onkeyup="PF('tabelausuarios').filter()" 
+                                placeholder="Pesquisar"/>
+                    </span>
+                </div>
             </f:facet>
                         <p:column headerText="ID">
                             <h:outputText value="#{usuario.id}" />
                         </p:column>
-                        <p:column headerText="Nome">
+                            <p:column headerText="Nome" field="nome" filterStyle="display: none;">
                             <h:outputText value="#{usuario.nome}" />
                         </p:column>
                         <p:column headerText="Senha">
                             <h:outputText value="#{usuario.senha}" />
                         </p:column>
-                        <p:column headerText="Telefone">
+                            <p:column headerText="Telefone" field="telefone" filterStyle="display: none;">
                             <h:outputText value="#{usuario.telefone}" />
                         </p:column>
-                        <p:column headerText="Email">
+                            <p:column headerText="Email" field="email" filterStyle="display: none;">
                             <h:outputText value="#{usuario.email}" />
                         </p:column>                                            
                     </p:dataTable> 
@@ -47,7 +57,9 @@
                             message="Remover?"
                             icon="pi pi-exclamation-triangle"
                             />
-                      </p:commandButton>
+                      </p:commandButton>                        
+                        &nbsp;
+                        <p:commandButton id="editar" title="Editar"  icon="pi pi-pencil" actionListener="#{usuarioBean.loadUsuario(usuario)}" update=":form2:painel-1"/>
                       <p:confirmPopup global="true">
             <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
             <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />

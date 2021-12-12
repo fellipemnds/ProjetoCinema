@@ -20,9 +20,9 @@
                         <p:dataTable id="tabelafilmes" widgetVar="tabelafilmes" var="filme" value="#{filmeBean.allFilme}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{filme.id}" selectionMode="single" selection="#{filmeBean.selectedFilme}"  reflow="true" filteredValue="#{filmeBean.filteredFilme}" size="small" style="width: auto">
             <f:facet name="header">
                 <div id="searchfilme" class="search">
-                    <h3>Selecione uma opção e pressione deletar</h3>
+                    <span>Selecione uma opção e pressione deletar ou clique com o botão direito</span>
                     
-                    <span class="filter-container ui-input-icon-left" >
+                    <span class="filter-container ui-input-icon-left"  style="margin-left: 550px">
                             <i class="pi pi-search" />
                             <p:inputText 
                                 id="globalFilter" 
@@ -31,10 +31,11 @@
                     </span>
                 </div>
             </f:facet>
+                           
                         <p:column headerText="ID">
                             <h:outputText value="#{filme.id}" />
                         </p:column>
-                        <p:column headerText="Título" field="titulo"  filterStyle="display: none;">
+        <p:column headerText="Título" field="titulo" filterStyle="display: none;">
                             <h:outputText value="#{filme.titulo}" />
                         </p:column>
                         <p:column headerText="Duração">
@@ -46,13 +47,13 @@
                         <p:column headerText="Resumo">
                             <h:outputText value="#{filme.resumo}" />
                         </p:column>
-                        <p:column headerText="Gênero" field="genero"  filterStyle="display: none;">
+        <p:column headerText="Gênero" field="genero" filterStyle="display: none;">
                             <h:outputText value="#{filme.genero}" />
                         </p:column>
                         <p:column headerText="Classificação">
                             <h:outputText value="#{filme.classificacao}" />
                         </p:column>
-                        <p:column headerText="Atores" field="atores"  filterStyle="display: none;">
+                        <p:column headerText="Atores" field="ator"  filterStyle="display: none;">
                             <h:outputText value="#{filme.ator}" />
                         </p:column>
                       <p:column headerText="Sessões" style="width: 15%">                        
@@ -69,7 +70,7 @@
                         action="#{filmeBean.MoverAtualLixeira()}"/>
             
             </p:contextMenu>
-                        <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{filmeBean.MoverAtualLixeira()}" style="margin-left: 48%" oncomplete="#{filmeBean.reset()}" > <p:confirm
+                        <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{filmeBean.MoverAtualLixeira()}" style="margin-left: 48%" oncomplete="#{filmeBean.reset()}"> <p:confirm
                             type="popup"
                             header="Deseja realmente remover?"
                             message="Remover?"

@@ -31,8 +31,13 @@ import javax.persistence.Table;
     @NamedQuery(
             name="formasdepagamento.findAll",
             query = "select fp from formasdepagamento fp " + "where fp.lixo = false " + "order by fp.id"
+    ),
+    @NamedQuery(
+            name="formasdepagamento.loadFdePaga",
+            query = "select distinct fp from formasdepagamento fp " + "left join fetch fp.cartao "
+                    + "where fp.lixo = false and fp.id=:id "                     
+                    + "order by fp.id"
     )
-    
 }
 )
 public class FormasDePagamento implements Serializable {
@@ -42,8 +47,18 @@ public class FormasDePagamento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tipoPagamento;
+    private Float valor;
     private boolean lixo;//Guisso usa esse sistema para remover da exibicao
 
+    public Float getValor() {
+        return valor;
+    }
+
+    public void setValor(Float valor) {
+        this.valor = valor;
+    }
+
+    
     public boolean isLixo() {
         return lixo;
     }
@@ -81,7 +96,7 @@ public class FormasDePagamento implements Serializable {
     
     @ManyToOne(fetch = FetchType.LAZY, // padrão
             cascade = CascadeType.ALL)
-    @JoinColumn(name = "pagamento_cartao")
+    @JoinColumn(name = "cartao_id")
     private Cartao cartao;
 
     public Cartao getCartao() {
@@ -99,10 +114,6 @@ public class FormasDePagamento implements Serializable {
     public void setIngresso(Ingresso ingresso) {
         this.ingresso = ingresso;
     }
-    
-    
-    
-    
 
     @Override
     public boolean equals(Object object) {
@@ -119,7 +130,7 @@ public class FormasDePagamento implements Serializable {
 
     @Override
     public String toString() {
-        return "io.github.fellipemnds.jakartaee8.projetocinema.FormasDePagamento[ id=" + id + " ]";
+        return "FormasDePagamento[ id=" + id +" tipo= "+tipoPagamento +" valor="+valor+"cartao="+cartao +" ]";
     }
     
     

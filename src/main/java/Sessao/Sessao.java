@@ -59,6 +59,7 @@ import javax.persistence.Table;
     
     
     
+    
 }
 )
 public class Sessao implements Serializable{

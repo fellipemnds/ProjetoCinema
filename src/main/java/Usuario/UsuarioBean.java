@@ -117,4 +117,15 @@ public class UsuarioBean implements Serializable{
         MoverLixeira(selectedUsuario);
         return "CRUD_usuario?faces-redirect=true";
     }
+    public Usuario loadUsuario(Usuario usuario){
+        if(usuario!=null){
+            Usuario usuariofull = usuarioservice.loadUsuarioWithIngressos(usuario.getId());
+            selectedUsuario = usuariofull;
+            return selectedUsuario;
+        }else{
+            return null;
+        }     
+    }
+    
+    
 }

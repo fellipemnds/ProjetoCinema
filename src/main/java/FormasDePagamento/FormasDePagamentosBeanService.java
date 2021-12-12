@@ -48,4 +48,17 @@ public class FormasDePagamentosBeanService implements FormasDePagamentoBeanServi
         formaDePagamento.setLixo(true);
         entityManager.merge(formaDePagamento);
     }
+
+    @Override
+    public FormasDePagamento loadFdePagamentos(Long id) {
+        
+        return entityManager
+                .createNamedQuery(
+                        "formasdepagamento.loadFdePaga",
+                        FormasDePagamento.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+    
+    
 }

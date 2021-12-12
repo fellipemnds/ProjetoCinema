@@ -28,6 +28,13 @@ import javax.persistence.Table;
     @NamedQuery(
             name="usuario.findAll",
             query = "select u from usuario u " + "where u.lixo = false " + "order by u.id"
+    ),
+    @NamedQuery(
+            name = "usuario.loadUsuarioWithIngressos",
+            query = "select distinct u from usuario u "
+            + "left join fetch u.ingressos "
+            + "where u.lixo = false and u.id = :id "
+            + "order by u.id"
     )
     
 }

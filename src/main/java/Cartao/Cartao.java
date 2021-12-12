@@ -29,6 +29,10 @@ import javax.persistence.Table;
             name="cartao.findAll",
             query = "select c from cartao c " + "where c.lixo = false " + "order by c.id"
     ),
+    @NamedQuery(
+            name="cartao.findCartaoByID",
+            query = "select c from cartao c " + "where c.lixo = false and c.id=:id " + "order by c.id"
+    )
  /*@NamedQuery(
             name = "cartao.loadFilmeByIdWithSessao",
             query = "select distinct f from filme f "
@@ -104,7 +108,7 @@ public class Cartao implements Serializable {
 
     @Override
     public String toString() {
-        return "Cartao.Cartao[ id=" + id + " ]";
+        return "Cartao[ id=" + id + " ]";
     }
     
 }
