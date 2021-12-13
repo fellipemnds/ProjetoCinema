@@ -34,8 +34,8 @@ import javax.persistence.Table;
     ),
     @NamedQuery(
             name="formasdepagamento.loadFdePaga",
-            query = "select distinct fp from formasdepagamento fp " + "left join fetch fp.cartao "
-                    + "where fp.lixo = false and fp.id=:id "                     
+            query = "select fp from formasdepagamento fp " + "left join fetch fp.cartao c "
+                    + "where fp.lixo = false and fp.id = :id "                     
                     + "order by fp.id"
     )
 }
@@ -48,7 +48,7 @@ public class FormasDePagamento implements Serializable {
     private Long id;
     private String tipoPagamento;
     private Float valor;
-    private boolean lixo;//Guisso usa esse sistema para remover da exibicao
+    private boolean lixo;//sistema para remover da exibicao
 
     public Float getValor() {
         return valor;
@@ -94,7 +94,7 @@ public class FormasDePagamento implements Serializable {
             orphanRemoval = true)
     private Ingresso ingresso;
     
-    @ManyToOne(fetch = FetchType.LAZY, // padrão
+    @ManyToOne(fetch = FetchType.EAGER, // EAGER, pois houve problemas de carregar dados no view 
             cascade = CascadeType.ALL)
     @JoinColumn(name = "cartao_id")
     private Cartao cartao;

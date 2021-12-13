@@ -126,7 +126,6 @@ public class FormasDePagamentoBean implements Serializable{
         if(formadepagamento!=null){
             FormasDePagamento FdPagmt = FormasDePagamentoservice.loadFdePagamentos(formadepagamento.getId());
             selectedFormasDePagamento = FdPagmt;
-            System.out.println("FDP: "+selectedFormasDePagamento);
             return selectedFormasDePagamento;
         }else{
             return null;
