@@ -101,4 +101,18 @@ public class IngressoBean implements Serializable{
         MoverLixeira(selectedIngresso);
         return "CRUD_Ingresso?faces-redirect=true";
     }
+    public Ingresso loadIngresso(Ingresso ingresso){
+        if(ingresso!=null){
+            Ingresso fullingresso = ingressoservice.loadIngresso(ingresso.getId());
+            selectedIngresso= fullingresso;
+            return selectedIngresso;
+        }else{
+            return null;
+        }
+        
+        
+    }
+    
+    
+    
 }

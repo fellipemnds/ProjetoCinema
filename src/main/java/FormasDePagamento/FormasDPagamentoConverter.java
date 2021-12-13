@@ -24,8 +24,10 @@ public class FormasDPagamentoConverter implements Converter<FormasDePagamento>{
 private FormasDePagamentoBeanServiceLocal FormasDePagamentoService;
 @Override
 public FormasDePagamento getAsObject(FacesContext fc, UIComponent uic, String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
+        if (id == null) {
+            return null;
+        }
+        return FormasDePagamentoService.findFPById(Long.parseLong(id));  
     }
 
     @Override

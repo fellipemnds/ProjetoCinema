@@ -21,7 +21,10 @@ public class SalaConverter implements Converter<Sala>{
     private SalaBeanServiceLocal salaService;
     @Override
     public Sala getAsObject(FacesContext fc, UIComponent uic, String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       if (id == null) {
+            return null;
+        }
+        return salaService.findSalaById(Long.parseLong(id));  
         
     }
 

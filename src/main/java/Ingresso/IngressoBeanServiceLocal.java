@@ -20,5 +20,9 @@ public interface IngressoBeanServiceLocal {
     List<Ingresso> findAll();
 
     void MoverLixeira(Ingresso ingresso);
+
+    Ingresso loadIngresso(Long id);
+
+    Ingresso findIngressoById(Long id);
     
 }

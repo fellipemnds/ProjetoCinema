@@ -27,9 +27,25 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name="ingresso.findAll",
-            query = "select i from ingresso i " + "where i.lixo = false " + "order by i.id"
+            query = "select i from ingresso i " 
+                    + "left join fetch i.usuario "
+                    + "left join fetch i.sessao "
+                    + "where i.lixo = false " + "order by i.id"
+    ),
+    @NamedQuery(
+            name="ingresso.loadIngresso",
+            query = "select i from ingresso i " 
+                    + "left join fetch i.usuario "
+                    + "left join fetch i.sessao "
+                    + "where i.lixo = false and i.id=:id " + "order by i.id"
+    ),
+    @NamedQuery(
+            name="ingresso.findIngressoById",
+            query = "select i from ingresso i " 
+                    + "left join fetch i.usuario "
+                    + "left join fetch i.sessao "
+                    + "where i.lixo = false and i.id=:id " + "order by i.id"
     )
-    
 }
 )
 public class Ingresso implements Serializable {
@@ -60,12 +76,12 @@ public class Ingresso implements Serializable {
     }
     @ManyToOne(fetch = FetchType.LAZY, // padrão
             cascade = CascadeType.ALL)
-    @JoinColumn(name = "ingresso_sessao")
+    @JoinColumn(name = "sessao_id")
     private Sessao sessao;
     
     @ManyToOne(fetch = FetchType.LAZY, // padrão
             cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_ingresso")
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
     
     @OneToOne(fetch = FetchType.EAGER, // padrão
@@ -124,7 +140,7 @@ public class Ingresso implements Serializable {
 
     @Override
     public String toString() {
-        return "io.github.fellipemnds.jakartaee8.projetocinema.Ingresso[ id=" + id + " ]";
+        return "Ingresso[ id=" + id + " ]";
     }
     
 }

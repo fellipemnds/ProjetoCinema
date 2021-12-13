@@ -23,8 +23,10 @@ public class UsuarioConverter implements Converter<Usuario> {
 private UsuarioBeanServiceLocal usuarioService;
 @Override
     public Usuario getAsObject(FacesContext fc, UIComponent uic, String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
+        if (id == null) {
+            return null;
+        }
+        return usuarioService.findUsuarioById(Long.parseLong(id));  
     }
 
     @Override

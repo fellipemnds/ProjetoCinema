@@ -27,15 +27,15 @@ public class SessaoBeanService implements SessaoBeanServiceLocal {
     public void Salvar(Sessao sessao) {
         if (entityManager.contains(sessao)) {
             // Update attached -- Ever used??
-            System.out.println("SessaoServiceBean::save[U].task => " + sessao);
+            System.out.println("SessaoServiceBean::save[U].sessao => " + sessao);
             entityManager.persist(sessao);
         } else if (sessao.getId() != null) {
             // Detached entity
-            System.out.println("SessaoServiceBean::save[U'].task => " + sessao);
+            System.out.println("SessaoServiceBean::save[U'].sessao => " + sessao);
             entityManager.merge(sessao);
         } else {
             // Create new
-            System.out.println("FilmeServiceBean::save[S].task => " + sessao);
+            System.out.println("SessaoServiceBean::save[S].sessao => " + sessao);
             
             // entityManager.persist(filme);
             // Forces the merge to all related entities
@@ -86,6 +86,16 @@ public class SessaoBeanService implements SessaoBeanServiceLocal {
                 .createNamedQuery(
                         "sessao.findFilmeBySessao",
                         Filme.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
+    @Override
+    public Sessao findSessaoByIngressos(Long id) {
+        return entityManager
+                .createNamedQuery(
+                        "sessao.findSessaoByIngressos",
+                        Sessao.class)
                 .setParameter("id", id)
                 .getSingleResult();
     }

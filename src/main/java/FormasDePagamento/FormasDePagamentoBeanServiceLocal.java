@@ -21,4 +21,6 @@ public interface FormasDePagamentoBeanServiceLocal  {
     public void MoverLixeira(FormasDePagamento formaDePagamento);
 
     FormasDePagamento loadFdePagamentos(Long id);
+
+    FormasDePagamento findFPById(Long id);
 }

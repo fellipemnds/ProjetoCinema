@@ -6,6 +6,7 @@
 package Sessao;
 
 import Filme.Filme;
+import Ingresso.Ingresso;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -146,11 +147,17 @@ public class SessaoBean implements Serializable{
         }else{
             return null;
         }
-        
-        
-        
+
     }
-    
-    
-    
+   public List<Ingresso> findSessaoByIngressos(Sessao sessao){
+        if(sessao!=null){
+            Sessao sessaofull = sessaoservice.findSessaoByIngressos(sessao.getId());
+            List<Ingresso> ingresso = sessaofull.getIngressos();
+            selectedSessao = sessaofull;
+            return ingresso;
+        }else{
+            return null;
+        }
+
+    }
 }

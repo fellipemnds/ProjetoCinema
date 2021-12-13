@@ -5,6 +5,7 @@
  */
 package Filme;
 
+import Sessao.Sessao;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -118,11 +119,11 @@ public class FilmeBean implements Serializable{
             return null;
         }
     }
-    public Filme LoadFilmeSessao(Filme filme){
+    public List<Sessao> LoadFilmeSessao(Filme filme){
         if (filme != null) {
             Filme fullFilme = filmeservice.loadFilmeWithSessao(filme.getId());
-            selectedFilme = fullFilme;
-            return selectedFilme;
+            List<Sessao> sessao = fullFilme.getSessoes();           
+            return sessao;
         } else {
             return null;
         }

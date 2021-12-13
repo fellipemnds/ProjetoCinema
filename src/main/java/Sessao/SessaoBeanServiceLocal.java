@@ -27,5 +27,7 @@ public interface SessaoBeanServiceLocal {
     List<Sessao> findSessaoByFilme(Long filmeId);
 
     Filme findFilmeBySessao(Long id);
+
+    Sessao findSessaoByIngressos(Long id);
     
 }

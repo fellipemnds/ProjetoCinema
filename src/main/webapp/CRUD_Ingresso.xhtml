@@ -33,6 +33,18 @@
                         <p:column headerText="ID">
                             <h:outputText value="#{ingresso.id}" />
                         </p:column>
+                        <p:column headerText="Forma de Pagamento">
+                            <h:outputText value="#{ingresso.formasDePagamento.tipoPagamento}" />
+                        </p:column>
+                        <p:column headerText="Usuário">
+                            <h:outputText value="#{ingresso.usuario.nome}" />
+                        </p:column>
+                        <p:column headerText="Sessão">
+                            <h:outputText id="data" value="#{ingresso.sessao.data}"  >
+                                  <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />
+                              </h:outputText><br/>
+                        </p:column>
+                        
                                                                       
                     </p:dataTable> 
                     <p:contextMenu for="tabelaingressos">
@@ -47,6 +59,8 @@
                             icon="pi pi-exclamation-triangle"
                             />
                       </p:commandButton>
+                        &nbsp;
+                        <p:commandButton id="editar" title="Editar" process="@form" icon="pi pi-pencil" actionListener="#{ingressoBean.loadIngresso(ingresso)}" update=":form2:painel-1"/> 
                       <p:confirmPopup global="true">
             <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
             <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />
@@ -57,7 +71,34 @@
                 <div style="display: flex; justify-content: center; margin-top: .5em;">
                 <h:form id="form2" >
                     <p:panelGrid id="painel-1"  columns="2">
-                                                
+                     <p:outputLabel for="selectfp" value="Forma de Pagamento:" />
+                     <p:selectOneMenu id="selectfp" value="#{ingressoBean.selectedIngresso.formasDePagamento}" converter="formasdepagamentoConverter">
+                            <f:selectItem itemLabel="Selecione uma forma"/>
+                            <f:selectItems value="#{formasDePagamentoBean.allFormasDePagamento}" itemLabel="#{forma.tipoPagamento}" var="forma" itemValue="#{forma}"/>
+                            <f:attribute 
+                                    name="collectionType" 
+                                    value="java.util.ArrayList" />
+                        </p:selectOneMenu>
+                     <p:outputLabel for="selectusuario" value="Usuário:" />
+                     <p:selectOneMenu id="selectusuario" value="#{ingressoBean.selectedIngresso.usuario}" converter="usuarioConverter">
+                            <f:selectItem itemLabel="Selecione um usuario"/>
+                            <f:selectItems value="#{usuarioBean.allUsuario}" itemLabel="#{usuario.nome}" var="usuario" itemValue="#{usuario}"/>
+                            <f:attribute 
+                                    name="collectionType" 
+                                    value="java.util.ArrayList" />
+                        </p:selectOneMenu>
+                     
+                     <p:outputLabel for="selectsessao" value="Sessão:" />
+                     <p:selectOneMenu id="selectsessao" value="#{ingressoBean.selectedIngresso.sessao}" converter="sessaoConverter">
+                            <f:selectItem itemLabel="Selecione um sessão"/>
+                            <f:selectItems value="#{sessaoBean.allSessao}" itemLabel="#{sessao.data}" var="sessao" itemValue="#{sesssao}"/> 
+                            <f:attribute 
+                                    name="collectionType" 
+                                    value="java.util.ArrayList" />
+                        </p:selectOneMenu>
+                     
+                     
+                     
                     </p:panelGrid>                 
                     <p:commandButton id="save" icon="pi pi-plus" style="margin-left: 55%" title="salvar" process="@form" action="#{ingressoBean.salvarAtual()}"/>                 
                 </h:form>

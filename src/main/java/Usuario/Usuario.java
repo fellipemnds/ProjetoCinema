@@ -35,6 +35,10 @@ import javax.persistence.Table;
             + "left join fetch u.ingressos "
             + "where u.lixo = false and u.id = :id "
             + "order by u.id"
+    ),
+    @NamedQuery(
+            name="usuario.findUsuarioById",
+            query = "select u from usuario u " + "where u.lixo = false and u.id=:id " + "order by u.id"
     )
     
 }

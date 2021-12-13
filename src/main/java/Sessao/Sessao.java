@@ -32,40 +32,50 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name="sessao.findAll",
-            query = "select s from sessao s " + "where s.lixo = false " + "order by s.id"
+            query = "select s from sessao s "                
+                    + "left join fetch s.filme "
+                    +"left join fetch s.sala "
+                    + "left join fetch s.ingressos "
+                    + "where s.lixo = false " + "order by s.id"
     ),
-     @NamedQuery(
+    @NamedQuery(
             name = "sessao.findSessaoById",
-            query = "select s from sessao s "
-                        + "left join fetch s.filme "
-            + "where s.lixo = false and s.id = :id "
-            + "order by s.data"
+            query = "select distinct s from sessao s " 
+            + "left join fetch s.filme "
+            + "left join fetch s.sala "
+            + "left join fetch s.ingressos "        
+            + "where s.lixo = false and s.id=:id " + "order by s.id"
+           
     ),
     @NamedQuery(
             name = "sessao.findSessaoByFilme",
             query = "select s from sessao s "
-                        //+ "inner join s.filme "
-            + "where s.lixo = false and s.filme.id = :id "
-            //+ "order by s.id"
+            + "left join fetch s.filme "
+            + "where s.lixo = false and s.id = :id "
+            + "order by s.id"
     ),
     @NamedQuery(
             name = "sessao.findFilmeBySessao",
             query = "select s.filme from sessao s "
-                        //+ "inner join s.filme f"
+             //+ "left join fetch s.filme "
             + "where s.lixo = false and s.filme.id = :id "
             //+ "order by s.id"
+    ),
+    @NamedQuery(
+            name = "sessao.findSessaoByIngressos",
+            query = "select s from sessao s "
+            + "left join fetch s.ingressos "
+            + "left join fetch s.filme "        
+            + "where s.lixo = false and s.id = :id "
+            + "order by s.id"
     )
-    
-    
-    
-    
-    
+
 }
 )
 public class Sessao implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String tipo;
     @Column(columnDefinition = "TIMESTAMP")
@@ -175,6 +185,6 @@ public class Sessao implements Serializable{
 
     @Override
     public String toString() {
-        return "Sessao[ id=" + id +" tipo: "+tipo + " data:"+ data +" ]";
+        return "Sessao[ id=" + id +" tipo: "+tipo + " data:"+ data +"ingressos: "+ingressos+ "]";
     }
 }

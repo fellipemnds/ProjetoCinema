@@ -41,6 +41,19 @@
                                   <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />                           
                               </h:outputText><br/>
                         </p:column>
+                        <p:column headerText="Sala">
+                            <h:outputText value="#{sessao.sala.id}" />
+                        </p:column>
+                        <p:column headerText="Ingressos" style="width: 15%">                        
+                            <ui:repeat  value="#{sessaoBean.findSessaoByIngressos(sessao)}"  var="ingresso" >
+                                <h:outputText id="ingressos" value="#{ingresso.id}"/><h:outputText value=", "/> 
+                            </ui:repeat>
+                        </p:column> 
+                        <p:column headerText="Filmes" style="width: 15%">
+                            <h:outputText id="filmes" value="#{sessao.filme.titulo}"  /> 
+                        </p:column>
+                        
+                        
                                                                       
                     </p:dataTable> 
                     <p:contextMenu for="tabelasessao">
@@ -73,9 +86,25 @@
                         <p:outputLabel value="Data e horário:" />
                         <p:datePicker id="data" value="#{sessaoBean.selectedSessao.data}"  mask="true"  maskSlotChar="_" pattern="dd/MM/yyyy" showButtonBar="true" showTime="true"/>
                         
-                           
-                      
+                        <p:outputLabel for="selectsala" value="Sala:" />
+                        <p:selectOneMenu id="selectsala" value="#{sessaoBean.selectedSessao.sala}" converter="salaConverter">
+                            <f:selectItem itemLabel="Selecione uma sala"/>
+                            <f:selectItems value="#{salaBean.allSala}" itemLabel="#{sala.id}" var="sala" itemValue="#{sala}"/>
+                            <f:attribute 
+                                    name="collectionType" 
+                                    value="java.util.ArrayList" />
+                        </p:selectOneMenu>
                         
+                        <p:outputLabel for="selectfilme" value="Filme:" />
+                        <p:selectOneMenu id="selectfilme" value="#{sessaoBean.selectedSessao.filme}" converter="filmeConverter">
+                            <f:selectItem itemLabel="Selecione uma filme"/>
+                            <f:selectItems value="#{filmeBean.allFilme}" itemLabel="#{filme.titulo}" var="filme" itemValue="#{filme}"/>
+                            <f:attribute 
+                                    name="collectionType" 
+                                    value="java.util.ArrayList" />
+                        </p:selectOneMenu>
+                        
+                       
                     </p:panelGrid>                 
                     <p:commandButton id="save" icon="pi pi-save" style="margin-left: 55%" title="salvar" process="@form" action="#{sessaoBean.salvarAtual()}"/>                 
                 </h:form>

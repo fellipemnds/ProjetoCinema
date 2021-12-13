@@ -57,9 +57,9 @@
                             <h:outputText value="#{filme.ator}" />
                         </p:column>
                       <p:column headerText="Sessões" style="width: 15%">                        
-                          <ui:repeat  value="#{sessaoBean.findSessionByFilme(filme)}" var="item" >
+                          <ui:repeat  value="#{filmeBean.LoadFilmeSessao(filme)}" var="item" >
                                 <h:outputText id="data" value="#{item.data}"  >
-                                  <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />                           
+                                  <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />
                               </h:outputText><br/>
                             </ui:repeat>
                         </p:column>   
@@ -111,7 +111,7 @@
                         <p:outputLabel value="Atores:" />
                         <p:inputText value="#{filmeBean.selectedFilme.ator}"/>
                         
-                      <p:outputLabel value="Sessões:" />
+                    <!-- <p:outputLabel value="Sessões:" />
                         <p:scrollPanel
                             style="max-height: 10em;">
                             <p:selectManyCheckbox
@@ -128,7 +128,7 @@
                                     name="collectionType" 
                                     value="java.util.ArrayList" />
                             </p:selectManyCheckbox>
-                        </p:scrollPanel>                        
+                        </p:scrollPanel>    -->               
                         
                     </p:panelGrid>                 
                     <p:commandButton id="save" icon="pi pi-save" style="margin-left: 55%" title="salvar" process="@form" action="#{filmeBean.salvarAtual()}" update=":form1:tabelafilmes"/>                 

@@ -58,6 +58,16 @@ public class UsuarioBeanService implements UsuarioBeanServiceLocal {
                 .setParameter("id", id)
                 .getSingleResult();
     }
+
+    @Override
+    public Usuario findUsuarioById(Long id) {
+        return entityManager
+                .createNamedQuery(
+                        "usuario.findUsuarioById",
+                        Usuario.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
     
     
 }

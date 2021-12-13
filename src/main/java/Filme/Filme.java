@@ -31,7 +31,9 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name="filme.findAll",
-            query = "select f from filme f " + "where f.lixo = false " + "order by f.id"
+            query = "select f from filme f " 
+                    + "left join fetch f.sessoes "
+                    + "where f.lixo = false " + "order by f.id"
     ),
  @NamedQuery(
             name = "filme.loadFilmeByIdWithSessao",
@@ -42,12 +44,10 @@ import javax.persistence.Table;
     ),
  @NamedQuery(
          name = "filme.loadFilmeWithSession",
-         query = "select distinct F,s.data from filme f "
-         + "left join fetch f.sessoes s "
+         query = "select distinct f from filme f "
+         + "left join fetch f.sessoes "
          + "where f.lixo = false and f.id = :id "
          + "order by f.id"
-         
- 
  )
         
 }
@@ -56,7 +56,7 @@ public class Filme implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)//IDENTITY nao funciona com dados no banco de dados, gera problemas de constraints 
     private Long id;
     private String titulo;
     private int duracao;    
@@ -65,7 +65,7 @@ public class Filme implements Serializable {
     private String genero;
     private int classificacao;
     private String ator;
-    private boolean lixo;//Guisso usa esse sistema para remover da exibicao
+    private boolean lixo;//sistema para remover da exibicao
 
     public boolean isLixo() {
         return lixo;

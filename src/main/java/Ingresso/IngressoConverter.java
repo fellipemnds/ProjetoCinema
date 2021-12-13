@@ -20,8 +20,10 @@ public class IngressoConverter implements Converter<Ingresso> {
     private IngressoBeanServiceLocal ingressoService;
     @Override
     public Ingresso getAsObject(FacesContext fc, UIComponent uic, String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
+        if (id == null) {
+            return null;
+        }
+        return ingressoService.findIngressoById(Long.parseLong(id));  
     }
 
     @Override

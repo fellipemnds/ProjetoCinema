@@ -26,15 +26,15 @@ public class IngressoBeanService implements IngressoBeanServiceLocal {
     public void Salvar(Ingresso ingresso) {
         if (entityManager.contains(ingresso)) {
             // Update attached -- Ever used??
-            System.out.println("TaskServiceBean::save[U].task => " + ingresso);
+            System.out.println("IngressoServiceBean::save[U].task => " + ingresso);
             entityManager.persist(ingresso);
         } else if (ingresso.getId() != null) {
             // Detached entity
-            System.out.println("TaskServiceBean::save[U'].task => " + ingresso);
+            System.out.println("IngressoServiceBean::save[U'].task => " + ingresso);
             entityManager.merge(ingresso);
         } else {
             // Create new
-            System.out.println("FilmeServiceBean::save[S].task => " + ingresso);
+            System.out.println("IngressoServiceBean::save[S].task => " + ingresso);
             
             // entityManager.persist(ingresso);
             // Forces the merge to all related entities
@@ -58,6 +58,26 @@ public class IngressoBeanService implements IngressoBeanServiceLocal {
     public void MoverLixeira(Ingresso ingresso) {
         ingresso.setLixo(true);
         entityManager.merge(ingresso);
+    }
+
+    @Override
+    public Ingresso loadIngresso(Long id) {
+        return entityManager
+                .createNamedQuery(
+                        "ingresso.loadIngresso",
+                        Ingresso.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
+    @Override
+    public Ingresso findIngressoById(Long id) {
+        return entityManager
+                .createNamedQuery(
+                        "ingresso.findIngressoById",
+                        Ingresso.class)
+                .setParameter("id", id)
+                .getSingleResult();
     }
     
     

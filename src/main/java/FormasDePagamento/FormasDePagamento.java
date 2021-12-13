@@ -30,13 +30,21 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name="formasdepagamento.findAll",
-            query = "select fp from formasdepagamento fp " + "where fp.lixo = false " + "order by fp.id"
+            query = "select fp from formasdepagamento fp " 
+                    +"left join fetch fp.cartao "
+                    + "where fp.lixo = false " + "order by fp.id"
     ),
     @NamedQuery(
             name="formasdepagamento.loadFdePaga",
             query = "select fp from formasdepagamento fp " + "left join fetch fp.cartao c "
                     + "where fp.lixo = false and fp.id = :id "                     
                     + "order by fp.id"
+    ),
+    @NamedQuery(
+            name="formasdepagamento.findFPById",
+            query = "select fp from formasdepagamento fp " 
+                    +"left join fetch fp.cartao "
+                    + "where fp.lixo = false and fp.id=:id " + "order by fp.id"
     )
 }
 )
@@ -94,7 +102,7 @@ public class FormasDePagamento implements Serializable {
             orphanRemoval = true)
     private Ingresso ingresso;
     
-    @ManyToOne(fetch = FetchType.EAGER, // EAGER, pois houve problemas de carregar dados no view 
+    @ManyToOne(fetch = FetchType.LAZY, // EAGER, pois houve problemas de carregar dados no view 
             cascade = CascadeType.ALL)
     @JoinColumn(name = "cartao_id")
     private Cartao cartao;

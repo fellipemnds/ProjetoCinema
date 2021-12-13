@@ -21,5 +21,7 @@ public interface UsuarioBeanServiceLocal {
     public void MoverLixeira(Usuario usuario);
 
     Usuario loadUsuarioWithIngressos(Long id);
+
+    Usuario findUsuarioById(Long id);
     
 }

@@ -66,6 +66,16 @@ public class SalaBeanService implements SalaBeanServiceLocal {
         
         
     }
+
+    @Override
+    public Sala findSalaById(Long id) {
+        return entityManager
+                .createNamedQuery(
+                        "sala.findSalaById",
+                        Sala.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
     
     
     

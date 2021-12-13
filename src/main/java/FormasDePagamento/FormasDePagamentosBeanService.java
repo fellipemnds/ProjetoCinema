@@ -59,6 +59,16 @@ public class FormasDePagamentosBeanService implements FormasDePagamentoBeanServi
                 .setParameter("id", id)
                 .getSingleResult();
     }
+
+    @Override
+    public FormasDePagamento findFPById(Long id) {
+        return entityManager
+                .createNamedQuery(
+                        "formasdepagamento.findFPById",
+                        FormasDePagamento.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
     
     
 }

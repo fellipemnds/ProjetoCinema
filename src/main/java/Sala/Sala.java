@@ -31,7 +31,12 @@ import javax.persistence.Table;
             + "left join fetch s.sessoes "
             + "where s.lixo = false and s.id = :id "
             + "order by s.id"
-     )
+     ),
+     @NamedQuery(
+            name="sala.findSalaById",
+            query = "select s from sala s " + "where s.lixo = false and s.id=:id "
+                    + "order by s.id"
+    )
 }
 )
 public class Sala implements Serializable{
@@ -107,7 +112,7 @@ public class Sala implements Serializable{
 
     @Override
     public String toString() {
-        return "io.github.fellipemnds.jakartaee8.projetocinema.Sala[ id=" + id + " ]";
+        return "Sala[ id=" + id +"Qtd assentos "+Qnt_assentos+" ]";
     }
     
 }
