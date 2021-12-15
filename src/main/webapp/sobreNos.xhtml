@@ -4,20 +4,32 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html" >
-        <h:head>
+    <h:head>
         <title>Sobre nosso cinema</title>
     </h:head>
     <h:body>
         <ui:composition template="./WEB-INF/template/template.xhtml">
-    <ui:define name="main">
-          <h2>Sobre nosso Cinema </h2>
-          <div class="div_sobre">
-            <p class="paragrafo_sobre"> A Rede MagicCine foi fundado em 2010. Desde o princípio, sempre tivemos como ideal proporcionar aos clientes a melhor experiência possível em cinema. Porque entendemos que este é um lugar mágico, onde sonhos se tornam realidade, a fantasia acontece e as emoções afloram.
-
-  Com isso em mente, procuramos levar aos nossos clientes o que há de mais moderno em som e imagem, conforto e um atendimento diferenciado. E claro, o produto principal: os filmes. Na Rede MagicCine você sempre irá encontrar as melhores produções e uma programação eclética.  </p>
-            <img class="movie_picture" src="images/cine.jpg" width="500" height="300" align="right"/>    
-          </div>
-    </ui:define>
+            <ui:define name="main">
+                <div class="corpo">
+                    <h2 id="titulo_sobrenos">Sobre nosso Cinema</h2>
+                    <div id="texto_sobre">
+                        <p id="paragrafo_sobre">A Rede MagicCine foi fundado em 
+                            2010. Desde o princípio, sempre tivemos como ideal 
+                            proporcionar aos clientes a melhor experiência possível 
+                            em cinema, porque entendemos que este é um lugar mágico, 
+                            onde sonhos se tornam realidade, a fantasia acontece e 
+                            as emoções afloram.
+                            <br />
+                            <br />
+                            Com isso em mente, procuramos levar aos nossos clientes 
+                            o que há de mais moderno em some imagem, conforto e um 
+                            atendimento diferenciado. E claro, o produto principal: 
+                            os filmes. Na Rede MagicCine você sempre irá encontrar 
+                            as melhores produções e uma programação eclética.</p>
+                        <img id="movie_picture" src="images/cine.jpg" width="500" height="300" align="right"/>  
+                    </div>
+                </div>
+            </ui:define>
         </ui:composition>
     </h:body>
 </html>

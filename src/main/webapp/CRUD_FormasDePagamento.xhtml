@@ -1,91 +1,96 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Cadastro de FormasDePagamentos</title>
     </h:head>
     <h:body>
         <ui:composition template ="./WEB-INF/template/template.xhtml">
-           
             <ui:define name="main">
-                <h1>Formas de Pagamentos no Banco da Dados</h1>
-                <div>
-                    <h:form id="form1">
-                        <p:dataTable id="tabelaformasDePagamentos" widgetVar="tabelaformasDePagamentos" var="formasDePagamento" value="#{formasDePagamentoBean.allFormasDePagamento}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{formasDePagamento.id}" selectionMode="single" selection="#{formasDePagamentoBean.selectedFormasDePagamento}"  reflow="true" filteredValue="#{formasDePagamentoBean.filteredFormasDePagamento}" size="small" style="width: auto">
-            <f:facet name="header">
-                <div id="searchformasDePagamento" class="search">
-                    <span>Selecione uma opção e pressione deletar ou clique com o botão direito</span>
-                    
-                    <span class="filter-container ui-input-icon-left"  style="margin-left: 550px">
-                            <i class="pi pi-search" />
-                            <p:inputText 
-                                id="globalFilter" 
-                                onkeyup="PF('tabelaformasDePagamentos').filter()" 
-                                placeholder="Pesquisar"/>
-                    </span>
+                <div class="corpo">
+                    <h1>Formas de pagamento cadastradas</h1>
+                    <div>
+                        <h:form id="form1">
+                            <p:dataTable id="tabelaformasDePagamentos" widgetVar="tabelaformasDePagamentos" var="formasDePagamento" value="#{formasDePagamentoBean.allFormasDePagamento}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{formasDePagamento.id}" selectionMode="single" selection="#{formasDePagamentoBean.selectedFormasDePagamento}"  reflow="true" filteredValue="#{formasDePagamentoBean.filteredFormasDePagamento}" size="small" style="width: auto">
+                                <f:facet name="header">
+                                    <div id="searchformasDePagamento" class="search">
+                                        <span>Selecione uma opção e pressione deletar ou clique com o botão direito</span>
+
+                                        <span class="filter-container ui-input-icon-left"  style="margin-left: 320px">
+                                            <i class="pi pi-search" />
+                                            <p:inputText 
+                                                id="globalFilter" 
+                                                onkeyup="PF('tabelaformasDePagamentos').filter()" 
+                                                placeholder="Pesquisar"/>
+                                        </span>
+                                    </div>
+                                </f:facet>
+                                <p:column headerText="ID">
+                                    <h:outputText value="#{formasDePagamento.id}" />
+                                </p:column>
+                                <p:column headerText="Tipo de Pagamento" field="tipoPagamento" filterStyle="display: none;">
+                                    <h:outputText value="#{formasDePagamento.tipoPagamento}" />
+                                </p:column>                      
+                                <p:column headerText="Valor">
+                                    <h:outputText value="#{formasDePagamento.valor}" />
+                                </p:column>
+                                <p:column headerText="ID do Cartão">
+                                    <h:outputText value="#{formasDePagamento.cartao.id}" />
+                                </p:column>   
+
+                            </p:dataTable> 
+                            <div class="botoes">
+                                <p:contextMenu for="tabelaformasDePagamentos">
+                                    <p:menuitem value="Delete" update="tabelaformasDePagamentos" icon="pi pi-times"
+                                                action="#{formasDePagamentoBean.MoverAtualLixeira()}"/>
+
+                                </p:contextMenu>
+                                <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{formasDePagamentoBean.MoverAtualLixeira()}" oncomplete="#{formasDePagamentoBean.reset()}"> <p:confirm
+                                        type="popup"
+                                        header="Deseja realmente remover?"
+                                        message="Remover?"
+                                        icon="pi pi-exclamation-triangle"
+                                        />
+                                </p:commandButton>
+                                &nbsp;
+                                <p:commandButton id="editar" title="Editar" process="@form" icon="pi pi-pencil" actionListener="#{formasDePagamentoBean.loadFdP(formadepagamento)}" update=":form2:painel-1"/>  
+                                <p:confirmPopup global="true">
+                                    <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                                    <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />
+                                </p:confirmPopup>
+                            </div>
+                        </h:form>     
+                    </div>
+                    <h1>Cadastrar forma de pagamento</h1>
+
+                    <div style="display: flex; justify-content: center; margin-top: .5em;">
+                        <h:form id="form2" >
+                            <p:panelGrid id="painel-1"  columns="2" style="width: 1100px" >
+                                <p:outputLabel value="Tipo de Pagamento:" />
+                                <p:inputText value="#{formasDePagamentoBean.selectedFormasDePagamento.tipoPagamento}"/> 
+                                <p:outputLabel value="Valor:" />
+                                <p:inputNumber symbol="R$ " symbolPosition="p" decimalSeparator="," thousandSeparator="." value="#{formasDePagamentoBean.selectedFormasDePagamento.valor}" /> 
+                                <p:outputLabel for="selectcartao" value="Cartão:" />
+                                <p:selectOneMenu id="selectcartao" value="#{formasDePagamentoBean.selectedFormasDePagamento.cartao}" converter="cartaoConverter">
+                                    <f:selectItem itemLabel="Selecione um cartão"/>
+                                    <f:selectItems value="#{cartaoBean.allCartao}" itemLabel="#{cartao.id}" var="cartao" itemValue="#{cartao}"/>
+                                    <f:attribute 
+                                        name="collectionType" 
+                                        value="java.util.ArrayList" />
+                                </p:selectOneMenu>                       
+                            </p:panelGrid>                 
+                            <div class="botoes">
+                                <p:commandButton id="save" icon="pi pi-save" title="salvar" process="@form" action="#{formasDePagamentoBean.salvarAtual()}" update=":form1:tabelaformasDePagamentos"/>
+                            </div>                 
+                        </h:form>
+                    </div> 
                 </div>
-            </f:facet>
-                        <p:column headerText="ID">
-                            <h:outputText value="#{formasDePagamento.id}" />
-                        </p:column>
-                        <p:column headerText="Tipo de Pagamento" field="tipoPagamento" filterStyle="display: none;">
-            <h:outputText value="#{formasDePagamento.tipoPagamento}" />
-                        </p:column>                      
-                        <p:column headerText="Valor">
-                            <h:outputText value="#{formasDePagamento.valor}" />
-                        </p:column>
-                         <p:column headerText="ID do Cartão">
-                             <h:outputText value="#{formasDePagamento.cartao.id}" />
-                        </p:column>   
-                                              
-                    </p:dataTable> 
-                    <p:contextMenu for="tabelaformasDePagamentos">
-            <p:menuitem value="Delete" update="tabelaformasDePagamentos" icon="pi pi-times"
-                        action="#{formasDePagamentoBean.MoverAtualLixeira()}"/>
-            
-            </p:contextMenu>
-                        <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{formasDePagamentoBean.MoverAtualLixeira()}" style="margin-left: 48%" oncomplete="#{formasDePagamentoBean.reset()}"> <p:confirm
-                            type="popup"
-                            header="Deseja realmente remover?"
-                            message="Remover?"
-                            icon="pi pi-exclamation-triangle"
-                            />
-                      </p:commandButton>
-                        &nbsp;
-                        <p:commandButton id="editar" title="Editar" process="@form" icon="pi pi-pencil" actionListener="#{formasDePagamentoBean.loadFdP(formadepagamento)}" update=":form2:painel-1"/>  
-                      <p:confirmPopup global="true">
-            <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
-            <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />
-        </p:confirmPopup>
-                </h:form>     
-                </div>
-                <h1>Cadastrar de FormasDePagamento</h1>
-                
-                <div style="display: flex; justify-content: center; margin-top: .5em;">
-                <h:form id="form2" >
-                    <p:panelGrid id="painel-1"  columns="2" style="width: auto" >
-                        <p:outputLabel value="Tipo de Pagamento:" />
-                        <p:inputText value="#{formasDePagamentoBean.selectedFormasDePagamento.tipoPagamento}"/> 
-                        <p:outputLabel value="Valor:" />
-                        <p:inputNumber symbol="R$ " symbolPosition="p" decimalSeparator="," thousandSeparator="." value="#{formasDePagamentoBean.selectedFormasDePagamento.valor}" /> 
-                        <p:outputLabel for="selectcartao" value="Cartão:" />
-                        <p:selectOneMenu id="selectcartao" value="#{formasDePagamentoBean.selectedFormasDePagamento.cartao}" converter="cartaoConverter">
-                            <f:selectItem itemLabel="Selecione um cartão"/>
-                            <f:selectItems value="#{cartaoBean.allCartao}" itemLabel="#{cartao.id}" var="cartao" itemValue="#{cartao}"/>
-                            <f:attribute 
-                                    name="collectionType" 
-                                    value="java.util.ArrayList" />
-                        </p:selectOneMenu>                       
-                    </p:panelGrid>                 
-                    <p:commandButton id="save" icon="pi pi-save" style="margin-left: 55%" title="salvar" process="@form" action="#{formasDePagamentoBean.salvarAtual()}" update=":form1:tabelaformasDePagamentos"/>                 
-                </h:form>
-                 </div> 
             </ui:define>
         </ui:composition>
     </h:body>

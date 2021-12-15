@@ -13,76 +13,78 @@
     <h:body>
         <ui:composition template ="./WEB-INF/template/template.xhtml">
             <ui:define name="main">
-                <h:form>
-                <div id="emCartaz">
-                    <p:carousel id="sessoes" value="#{sessaoBean.allSessao}" var="sessao" circular="true" autoplayInterval="3000" numVisible="4" numScroll="1" style="width: 48%">  
-                        <f:facet name="header">
-                            <h1>Em cartaz</h1>
-                        </f:facet>
-                    <div >
-                <div>
-                   <div class="p-mb-3">
-                      
-                       <p:commandLink oncomplete="location.href='filme.xhtml';" >
-                        <p:graphicImage url="images/#{sessaoBean.findFilmeBySessao(sessao).titulo}.jpg" />
-                        <f:setPropertyActionListener for="sessoes" value="#{sessao.filme}" target="#{filmeBean.selectedFilme}"/>
-                         </p:commandLink>
-                    </div>
-                    <div>
-                        <h3 class="p-mb-1">#{sessaoBean.findFilmeBySessao(sessao).titulo}</h3>
-                        <div class="p-mb-1">
-                            <h6>Sessões:</h6>                        
-                            <ui:repeat  value="#{sessaoBean.findSessionByFilme(sessao.filme)}" var="item" >
-                                <h:outputText id="data" value="#{item.data}"  >
-                                  <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />                           
-                              </h:outputText><br/>
-                            </ui:repeat>
-                        
-            
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <div class="corpo">
+                    <h:form>
+                        <div id="emCartaz">
+                            <p:carousel id="sessoes" value="#{sessaoBean.allSessao}" var="sessao" circular="true" autoplayInterval="3000" numVisible="4" numScroll="1">  
+                                <f:facet name="header">
+                                    <h1>Em cartaz</h1>
+                                </f:facet>
+                                <div >
+                                    <div>
+                                        <div class="p-mb-3">
 
-</p:carousel>
-                    
-                </div>
-                </h:form>        
-                <div>
-                    <p:carousel id="sessoes" value="#{sessaoBean.allSessao}" var="sessao" circular="true" autoplayInterval="2500" numVisible="4" numScroll="1" style="width: 48%">  
-                        <f:facet name="header">
-                            <h1>Estreias</h1>
-                        </f:facet>
-                    <div >
-                <div>
-                   <div class="p-mb-3">
-                        <p:commandLink oncomplete="location.href='filme.xhtml';" >
-                        <p:graphicImage url="images/#{sessaoBean.findFilmeBySessao(sessao).titulo}.jpg" />
-                        <f:setPropertyActionListener for="sessoes" value="#{sessao.filme}" target="#{filmeBean.selectedFilme}"/>
-                         </p:commandLink>
-                    </div>
-                    <div>
-                        <h3 class="p-mb-1">#{sessaoBean.findFilmeBySessao(sessao).titulo}</h3>
-                        <div class="p-mb-1">
-                            <h6>Sessões:</h6>                        
-                            <ui:repeat  value="#{sessaoBean.findSessionByFilme(sessao.filme)}" var="item" >
-                                <h:outputText id="data" value="#{item.data}"  >
-                                  <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />                           
-                              </h:outputText><br/>
-                            </ui:repeat>
-                        
-            
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                            <p:commandLink oncomplete="location.href='filme.xhtml';" >
+                                                <p:graphicImage url="images/#{sessaoBean.findFilmeBySessao(sessao).titulo}.jpg" />
+                                                <f:setPropertyActionListener for="sessoes" value="#{sessao.filme}" target="#{filmeBean.selectedFilme}"/>
+                                            </p:commandLink>
+                                        </div>
+                                        <div>
+                                            <h3 class="p-mb-1">#{sessaoBean.findFilmeBySessao(sessao).titulo}</h3>
+                                            <div class="p-mb-1">
+                                                <h6>Sessões:</h6>                        
+                                                <ui:repeat  value="#{sessaoBean.findSessionByFilme(sessao.filme)}" var="item" >
+                                                    <h:outputText id="data" value="#{item.data}"  >
+                                                        <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />                           
+                                                    </h:outputText><br/>
+                                                </ui:repeat>
 
-</p:carousel>
-                    
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </p:carousel>
+
+                        </div>
+                    </h:form>        
+                    <div>
+                        <p:carousel id="sessoes" value="#{sessaoBean.allSessao}" var="sessao" circular="true" autoplayInterval="2500" numVisible="4" numScroll="1">  
+                            <f:facet name="header">
+                                <h1>Estreias</h1>
+                            </f:facet>
+                            <div >
+                                <div>
+                                    <div class="p-mb-3">
+                                        <p:commandLink oncomplete="location.href='filme.xhtml';" >
+                                            <p:graphicImage url="images/#{sessaoBean.findFilmeBySessao(sessao).titulo}.jpg" />
+                                            <f:setPropertyActionListener for="sessoes" value="#{sessao.filme}" target="#{filmeBean.selectedFilme}"/>
+                                        </p:commandLink>
+                                    </div>
+                                    <div>
+                                        <h3 class="p-mb-1">#{sessaoBean.findFilmeBySessao(sessao).titulo}</h3>
+                                        <div class="p-mb-1">
+                                            <h6>Sessões:</h6>                        
+                                            <ui:repeat  value="#{sessaoBean.findSessionByFilme(sessao.filme)}" var="item" >
+                                                <h:outputText id="data" value="#{item.data}"  >
+                                                    <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />                           
+                                                </h:outputText><br/>
+                                            </ui:repeat>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </p:carousel>
+
+                    </div>
                 </div>
             </ui:define>                  
-            
-            
+
+
         </ui:composition>
 
 

@@ -3,32 +3,42 @@
 <html lang="pt-BR"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html" >
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Login</title>
     </h:head>
     <h:body>
         <ui:composition template="/WEB-INF/template/template.xhtml">
-        <ui:define name="main">
-            <h2>Cadastro: </h2>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="Nome" />
-                    <h:inputText id="nome" />
-                    
-                    <h:outputText value="E-mail" />
-                    <h:inputText id="email" />
-                    
-                    <h:outputText value="Telefone" />
-                    <h:inputText id="telefone" />
-                    
-                    <h:outputText value="Senha" />
-                    <h:inputSecret id="senha" />
-                </h:panelGrid>
-                <h:commandButton value="Finalizar" />
-            </h:form>
-        </ui:define>
-    </ui:composition>
+            <ui:define name="main">
+                <div id="area_cadastro">
+                    <h2>Cadastro: </h2>
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:inputText id="nome" styleClass="area_input">
+                                <f:passThroughAttribute name="placeholder" value="Nome" />
+                            </h:inputText>
+
+                            <h:outputText value="" />
+                            <h:inputText id="email" styleClass="area_input">
+                                <f:passThroughAttribute name="placeholder" value="E-mail" />
+                            </h:inputText>
+
+                            <h:outputText value="" />
+                            <h:inputText id="telefone" styleClass="area_input">
+                                <f:passThroughAttribute name="placeholder" value="Telefone" />
+                            </h:inputText>
+
+                            <h:outputText value="" />
+                            <h:inputSecret id="senha" styleClass="area_input">
+                                <f:passThroughAttribute name="placeholder" value="Senha" />
+                            </h:inputSecret>
+                        </h:panelGrid>
+                        <h:commandButton value="Finalizar" styleClass="botao_login"/>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

@@ -1,73 +1,78 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Cadastro de Cartaos</title>
     </h:head>
     <h:body>
         <ui:composition template ="./WEB-INF/template/template.xhtml">
-           
             <ui:define name="main">
-                <h1>Cartãos no Banco da Dados</h1>
-                <div>
-                    <h:form id="form1">
-                        <p:dataTable id="tabelacartaos" widgetVar="tabelacartaos" var="cartao" value="#{cartaoBean.allCartao}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{cartao.id}" selectionMode="single" selection="#{cartaoBean.selectedCartao}"  reflow="true" filteredValue="#{cartaoBean.filteredCartao}" size="small" style="width: auto">
-            <f:facet name="header">
-                <div id="searchcartao" class="search">
-                    <span>Selecione uma opção e pressione deletar ou clique com o botão direito</span>
-                    
-                    <span class="filter-container ui-input-icon-left"  style="margin-left: 550px">
-                            <i class="pi pi-search" />
-                            <p:inputText 
-                                id="globalFilter" 
-                                onkeyup="PF('tabelacartaos').filter()" 
-                                placeholder="Pesquisar"/>
-                    </span>
+                <div class="corpo">
+                    <h1>Cartões cadastados</h1>
+                    <div>
+                        <h:form id="form1">
+                            <p:dataTable id="tabelacartaos" widgetVar="tabelacartaos" var="cartao" value="#{cartaoBean.allCartao}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{cartao.id}" selectionMode="single" selection="#{cartaoBean.selectedCartao}"  reflow="true" filteredValue="#{cartaoBean.filteredCartao}" size="small" style="width: auto">
+                                <f:facet name="header">
+                                    <div id="searchcartao" class="search">
+                                        <span>Selecione uma opção e pressione deletar ou clique com o botão direito</span>
+
+                                        <span class="filter-container ui-input-icon-left"  style="margin-left: 320px">
+                                            <i class="pi pi-search" />
+                                            <p:inputText 
+                                                id="globalFilter" 
+                                                onkeyup="PF('tabelacartaos').filter()" 
+                                                placeholder="Pesquisar"/>
+                                        </span>
+                                    </div>
+                                </f:facet>
+
+                                <p:column headerText="ID">
+                                    <h:outputText value="#{cartao.id}" />
+                                </p:column>
+
+
+                            </p:dataTable> 
+                            <div class="botoes">
+                                <p:contextMenu for="tabelacartaos">
+                                    <p:menuitem value="Delete" update="tabelacartaos" icon="pi pi-times"
+                                                action="#{cartaoBean.MoverAtualLixeira()}"/>
+
+                                </p:contextMenu>
+                                <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{cartaoBean.MoverAtualLixeira()}" oncomplete="#{cartaoBean.reset()}"> <p:confirm
+                                        type="popup"
+                                        header="Deseja realmente remover?"
+                                        message="Remover?"
+                                        icon="pi pi-exclamation-triangle"
+                                        />
+                                </p:commandButton>
+                                <!-- &nbsp;
+                                 <p:commandButton id="editar" title="Editar"  icon="pi pi-pencil" actionListener="#{cartaoBean}" update=":form2:painel-1"/>  -->
+                                <p:confirmPopup global="true">
+                                    <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                                    <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />
+                                </p:confirmPopup>
+                            </div>
+                        </h:form>     
+                    </div>
+                    <h1>Cadastrar cartão</h1>
+
+                    <div style="display: flex; justify-content: center; margin-top: .5em;">
+                        <h:form id="form2" >
+                            <p:panelGrid id="painel-1"  columns="2" style="width: 1100px" >
+
+                            </p:panelGrid>                 
+                            <div class="botoes">
+                                <p:commandButton id="save" icon="pi pi-plus" title="salvar" process="@form" action="#{cartaoBean.salvarAtual()}" update=":form1:tabelacartaos"/>
+                            </div>                 
+                        </h:form>
+                    </div> 
                 </div>
-            </f:facet>
-                           
-                        <p:column headerText="ID">
-                            <h:outputText value="#{cartao.id}" />
-                        </p:column>
-      
-                                              
-                    </p:dataTable> 
-                    <p:contextMenu for="tabelacartaos">
-            <p:menuitem value="Delete" update="tabelacartaos" icon="pi pi-times"
-                        action="#{cartaoBean.MoverAtualLixeira()}"/>
-            
-            </p:contextMenu>
-                        <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{cartaoBean.MoverAtualLixeira()}" style="margin-left: 48%" oncomplete="#{cartaoBean.reset()}"> <p:confirm
-                            type="popup"
-                            header="Deseja realmente remover?"
-                            message="Remover?"
-                            icon="pi pi-exclamation-triangle"
-                            />
-                      </p:commandButton>
-                       <!-- &nbsp;
-                        <p:commandButton id="editar" title="Editar"  icon="pi pi-pencil" actionListener="#{cartaoBean}" update=":form2:painel-1"/>  -->
-                      <p:confirmPopup global="true">
-            <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
-            <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />
-        </p:confirmPopup>
-                </h:form>     
-                </div>
-                <h1>Cadastrar de Cartao</h1>
-                
-                <div style="display: flex; justify-content: center; margin-top: .5em;">
-                <h:form id="form2" >
-                    <p:panelGrid id="painel-1"  columns="2" style="width: auto" >
-        
-                    </p:panelGrid>                 
-                    <p:commandButton id="save" icon="pi pi-plus" style="margin-left: 55%" title="salvar" process="@form" action="#{cartaoBean.salvarAtual()}" update=":form1:tabelacartaos"/>                 
-                </h:form>
-                 </div> 
             </ui:define>
         </ui:composition>
     </h:body>

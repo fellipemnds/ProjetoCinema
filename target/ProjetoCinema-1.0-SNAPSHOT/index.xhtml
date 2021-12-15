@@ -2,11 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="pt-BR"
       xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Home</title>
     </h:head>
@@ -14,60 +14,61 @@
         <ui:composition template="/WEB-INF/template/template.xhtml">
             <ui:define name="main">
                 <div id="movies">
-                 <style type="text/css">
+                    <style type="text/css">
                         .value {
                             font-weight: bold;
                         }
-                 </style>
- 
-<h:form id="form">
-    <p:dataGrid var="filme" value="#{filmeBean.allFilme}" columns="3" layout="grid"
-        rows="12" paginator="true" id="filme"
-        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-        rowsPerPageTemplate="6,12,16" style="width: 1000px">
-         
-        <f:facet name="header">
-            Filmes diponíveis
-        </f:facet>
- 
-        <p:panel header="#{filme.titulo}" style="text-align:center; width: 250px ">
-            <h:panelGrid columns="1" style="width:100%">
-                <p:commandLink onclick="location.href='filme.xhtml';">
-                <p:graphicImage url="images/#{filme.titulo}.jpg"/>
-                <f:setPropertyActionListener value="#{filme}" target="#{filmeBean.selectedFilme}" />
-                </p:commandLink>
-                <p:rating readonly="true" value="#{filme.nota}"/>
- 
-                <p:commandLink update=":form:filmeDetalhe" oncomplete="PF('filmeDialog').show()" title="View Detail">                    <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;"/>
-                    <f:setPropertyActionListener value="#{filme}" target="#{filmeBean.selectedFilme}" />
-                </p:commandLink>
-                                  
-                
-            </h:panelGrid>
-        </p:panel>
- 
-    </p:dataGrid>
- 
-    <p:dialog header="Info de filme" widgetVar="filmeDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-        <p:outputPanel id="filmeDetalhe" style="text-align:center;">
-            <p:panelGrid  columns="2" rendered="#{not empty filmeBean.selectedFilme}" columnClasses="label,value">
-                
-                <f:facet name="header">
-                    <p:graphicImage url="images/#{filmes.titulo}.jpg"/> 
-                </f:facet>
-                 
-                <h:outputText value="Título" />
-                <h:outputText value="#{filmeBean.selectedFilme.titulo}" />
- 
-                <h:outputText value="Resumo:" />
-                <h:outputText value="#{filmeBean.selectedFilme.resumo}"/>
-             
-                <h:outputText value="Nota" />
-                <h:outputText value="#{filmeBean.selectedFilme.nota}" />
-                 </p:panelGrid>
-                </p:outputPanel>
-                </p:dialog>
-                </h:form>
+                    </style>
+
+                    <h:form id="form">
+                        <p:dataGrid var="filme" value="#{filmeBean.allFilme}" columns="3" layout="grid"
+                                    rows="12" paginator="true" id="filme"
+                                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                    rowsPerPageTemplate="6,12,16" style="width: 1000px">
+
+                            <f:facet name="header">
+                                Filmes diponíveis
+                            </f:facet>
+
+                            <p:panel header="#{filme.titulo}" style="text-align:center; width: 250px ">
+                                <h:panelGrid columns="1" style="width:100%">
+                                    <p:commandLink onclick="location.href = 'filme.xhtml';">
+                                        <p:graphicImage url="images/#{filme.titulo}.jpg"/>
+                                        <f:setPropertyActionListener value="#{filme}" target="#{filmeBean.selectedFilme}" />
+                                    </p:commandLink>
+                                    <p:rating readonly="true" value="#{filme.nota}"/>
+
+                                    <p:commandLink update=":form:filmeDetalhe" oncomplete="PF('filmeDialog').show()" title="View Detail">                    
+                                        <h:outputText styleClass="ui-icon pi pi-search" style="margin:0 auto;"/>
+                                        <f:setPropertyActionListener value="#{filme}" target="#{filmeBean.selectedFilme}" />
+                                    </p:commandLink>
+
+
+                                </h:panelGrid>
+                            </p:panel>
+
+                        </p:dataGrid>
+
+                        <p:dialog header="Info de filme" widgetVar="filmeDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                            <p:outputPanel id="filmeDetalhe" style="text-align:center;">
+                                <p:panelGrid  columns="2" rendered="#{not empty filmeBean.selectedFilme}" columnClasses="label,value">
+
+                                    <f:facet name="header">
+                                        <p:graphicImage url="images/#{filmes.titulo}.jpg"/> 
+                                    </f:facet>
+
+                                    <h:outputText value="Título" />
+                                    <h:outputText value="#{filmeBean.selectedFilme.titulo}" />
+
+                                    <h:outputText value="Resumo:" />
+                                    <h:outputText value="#{filmeBean.selectedFilme.resumo}"/>
+
+                                    <h:outputText value="Nota" />
+                                    <h:outputText value="#{filmeBean.selectedFilme.nota}" />
+                                </p:panelGrid>
+                            </p:outputPanel>
+                        </p:dialog>
+                    </h:form>
                 </div>
             </ui:define>
         </ui:composition>

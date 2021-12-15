@@ -1,92 +1,97 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Cadastro de Usuários</title>
     </h:head>
     <h:body>
         <ui:composition template ="./WEB-INF/template/template.xhtml">
-           
             <ui:define name="main">
-                <h1>Filmes no Banco da Dados</h1>
-                <div>
-                    <h:form id="form1">
-                        <p:dataTable id="tabelausuarios" widgetVar="tabelausuarios" var="usuario" value="#{usuarioBean.allUsuario}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{usuario.id}" selectionMode="single" selection="#{usuarioBean.selectedUsuario}">
-                        <f:facet name="header">
-                <div id="searchfilme" class="search">
-                    <span>Selecione uma opção e pressione deletar ou clique com o botão direito</span>
-                    
-                    <span class="filter-container ui-input-icon-left"  style="margin-left: 550px">
-                            <i class="pi pi-search" />
-                            <p:inputText 
-                                id="globalFilter" 
-                                onkeyup="PF('tabelausuarios').filter()" 
-                                placeholder="Pesquisar"/>
-                    </span>
+                <div class="corpo">
+                    <h1>Usuários cadastrados</h1>
+                    <div>
+                        <h:form id="form1">
+                            <p:dataTable id="tabelausuarios" widgetVar="tabelausuarios" var="usuario" value="#{usuarioBean.allUsuario}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{usuario.id}" selectionMode="single" selection="#{usuarioBean.selectedUsuario}">
+                                <f:facet name="header">
+                                    <div id="searchfilme" class="search">
+                                        <span>Selecione uma opção e pressione deletar ou clique com o botão direito</span>
+
+                                        <span class="filter-container ui-input-icon-left"  style="margin-left: 320px">
+                                            <i class="pi pi-search" />
+                                            <p:inputText 
+                                                id="globalFilter" 
+                                                onkeyup="PF('tabelausuarios').filter()" 
+                                                placeholder="Pesquisar"/>
+                                        </span>
+                                    </div>
+                                </f:facet>
+                                <p:column headerText="ID">
+                                    <h:outputText value="#{usuario.id}" />
+                                </p:column>
+                                <p:column headerText="Nome" field="nome" filterStyle="display: none;">
+                                    <h:outputText value="#{usuario.nome}" />
+                                </p:column>
+                                <p:column headerText="Senha">
+                                    <h:outputText value="#{usuario.senha}" />
+                                </p:column>
+                                <p:column headerText="Telefone" field="telefone" filterStyle="display: none;">
+                                    <h:outputText value="#{usuario.telefone}" />
+                                </p:column>
+                                <p:column headerText="Email" field="email" filterStyle="display: none;">
+                                    <h:outputText value="#{usuario.email}" />
+                                </p:column>                                            
+                            </p:dataTable> 
+                            <div class="botoes">
+                                <p:contextMenu for="tabelausuarios">
+                                    <p:menuitem value="Delete" update="tabelausuarios" icon="pi pi-times"
+                                                action="#{usuarioBean.MoverAtualLixeira()}"/>
+
+                                </p:contextMenu>
+                                <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{usuarioBean.MoverAtualLixeira()}" oncomplete="#{filmeBean.reset()}"> <p:confirm
+                                        type="popup"
+                                        header="Deseja realmente remover?"
+                                        message="Remover?"
+                                        icon="pi pi-exclamation-triangle"
+                                        />
+                                </p:commandButton>                        
+                                &nbsp;
+                                <p:commandButton id="editar" title="Editar"  icon="pi pi-pencil" actionListener="#{usuarioBean.loadUsuario(usuario)}" update=":form2:painel-1"/>
+                                <p:confirmPopup global="true">
+                                    <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                                    <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />
+                                </p:confirmPopup>
+                            </div>
+                        </h:form>     
+                    </div>
+                    <h1>Cadastrar usuário</h1>
+                    <div style="display: flex; justify-content: center; margin-top: .5em;">
+                        <h:form id="form2" >
+                            <p:panelGrid id="painel-1"  columns="2" style="width: 1100px;">
+                                <p:outputLabel value="Nome:" />
+                                <p:inputText value="#{usuarioBean.selectedUsuario.nome}"/>
+
+                                <p:outputLabel value="Senha:" />
+                                <p:inputText value="#{usuarioBean.selectedUsuario.senha}"/>
+
+                                <p:outputLabel value="Telefone:" />
+                                <p:inputText value="#{usuarioBean.selectedUsuario.telefone}"/>
+
+                                <p:outputLabel value="Email:" />
+                                <p:inputText value="#{usuarioBean.selectedUsuario.email}"/>
+
+
+                            </p:panelGrid>                 
+                            <div class="botoes">
+                                <p:commandButton id="save" icon="pi pi-save" title="salvar" process="@form" action="#{usuarioBean.salvarAtual()}"/>
+                            </div>                 
+                        </h:form>
+                    </div> 
                 </div>
-            </f:facet>
-                        <p:column headerText="ID">
-                            <h:outputText value="#{usuario.id}" />
-                        </p:column>
-                            <p:column headerText="Nome" field="nome" filterStyle="display: none;">
-                            <h:outputText value="#{usuario.nome}" />
-                        </p:column>
-                        <p:column headerText="Senha">
-                            <h:outputText value="#{usuario.senha}" />
-                        </p:column>
-                            <p:column headerText="Telefone" field="telefone" filterStyle="display: none;">
-                            <h:outputText value="#{usuario.telefone}" />
-                        </p:column>
-                            <p:column headerText="Email" field="email" filterStyle="display: none;">
-                            <h:outputText value="#{usuario.email}" />
-                        </p:column>                                            
-                    </p:dataTable> 
-                    <p:contextMenu for="tabelausuarios">
-            <p:menuitem value="Delete" update="tabelausuarios" icon="pi pi-times"
-                        action="#{usuarioBean.MoverAtualLixeira()}"/>
-            
-            </p:contextMenu>
-                    <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{usuarioBean.MoverAtualLixeira()}" style="margin-left: 48%" oncomplete="#{filmeBean.reset()}"> <p:confirm
-                            type="popup"
-                            header="Deseja realmente remover?"
-                            message="Remover?"
-                            icon="pi pi-exclamation-triangle"
-                            />
-                      </p:commandButton>                        
-                        &nbsp;
-                        <p:commandButton id="editar" title="Editar"  icon="pi pi-pencil" actionListener="#{usuarioBean.loadUsuario(usuario)}" update=":form2:painel-1"/>
-                      <p:confirmPopup global="true">
-            <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
-            <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />
-        </p:confirmPopup>
-                </h:form>     
-                </div>
-                <h1>Cadastrar de Usuário</h1>
-                <div style="display: flex; justify-content: center; margin-top: .5em;">
-                <h:form id="form2" >
-                    <p:panelGrid id="painel-1"  columns="2">
-                        <p:outputLabel value="Nome:" />
-                        <p:inputText value="#{usuarioBean.selectedUsuario.nome}"/>
-                        
-                        <p:outputLabel value="Senha:" />
-                        <p:inputText value="#{usuarioBean.selectedUsuario.senha}"/>
-                        
-                        <p:outputLabel value="Telefone:" />
-                        <p:inputText value="#{usuarioBean.selectedUsuario.telefone}"/>
-                        
-                        <p:outputLabel value="Email:" />
-                        <p:inputText value="#{usuarioBean.selectedUsuario.email}"/>
-                        
-                                              
-                    </p:panelGrid>                 
-                    <p:commandButton id="save" icon="pi pi-save" style="margin-left: 55%" title="salvar" process="@form" action="#{usuarioBean.salvarAtual()}"/>                 
-                </h:form>
-                 </div> 
             </ui:define>
         </ui:composition>
     </h:body>

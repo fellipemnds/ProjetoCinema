@@ -1,120 +1,122 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Cadastro de Filmes</title>
     </h:head>
     <h:body>
         <ui:composition template ="./WEB-INF/template/template.xhtml">
-           
             <ui:define name="main">
-                <h1>Filmes no Banco da Dados</h1>
-                <div>
-                    <h:form id="form1">
-                        <p:dataTable id="tabelafilmes" widgetVar="tabelafilmes" var="filme" value="#{filmeBean.allFilme}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{filme.id}" selectionMode="single" selection="#{filmeBean.selectedFilme}"  reflow="true" filteredValue="#{filmeBean.filteredFilme}" size="small" style="width: auto">
-            <f:facet name="header">
-                <div id="searchfilme" class="search">
-                    <span>Selecione uma opção e pressione deletar ou clique com o botão direito</span>
-                    
-                    <span class="filter-container ui-input-icon-left"  style="margin-left: 550px">
-                            <i class="pi pi-search" />
-                            <p:inputText 
-                                id="globalFilter" 
-                                onkeyup="PF('tabelafilmes').filter()" 
-                                placeholder="Pesquisar"/>
-                    </span>
+                <div class="corpo">
+                    <h1>Filmes cadastrados</h1>
+                    <div>
+                        <h:form id="form1">
+                            <p:dataTable id="tabelafilmes" widgetVar="tabelafilmes" var="filme" value="#{filmeBean.allFilme}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{filme.id}" selectionMode="single" selection="#{filmeBean.selectedFilme}"  reflow="true" filteredValue="#{filmeBean.filteredFilme}" size="small" style="width: auto">
+                                <f:facet name="header">
+                                    <div id="searchfilme" class="search">
+                                        <span>Selecione uma opção e pressione deletar ou clique com o botão direito</span>
+                                        <span class="filter-container ui-input-icon-left"  style="margin-left: 320px;">
+                                            <i class="pi pi-search" />
+                                            <p:inputText 
+                                                id="globalFilter" 
+                                                onkeyup="PF('tabelafilmes').filter()" 
+                                                placeholder="Pesquisar"/>
+                                        </span>
+                                    </div>
+                                </f:facet>
+
+                                <p:column headerText="ID">
+                                    <h:outputText value="#{filme.id}" />
+                                </p:column>
+                                <p:column headerText="Título" field="titulo" filterStyle="display: none;">
+                                    <h:outputText value="#{filme.titulo}" />
+                                </p:column>
+                                <p:column headerText="Duração">
+                                    <h:outputText value="#{filme.duracao}" />
+                                </p:column>
+                                <p:column headerText="Nota">
+                                    <h:outputText value="#{filme.nota}" />
+                                </p:column>
+                                <p:column headerText="Resumo">
+                                    <h:outputText value="#{filme.resumo}" />
+                                </p:column>
+                                <p:column headerText="Gênero" field="genero" filterStyle="display: none;">
+                                    <h:outputText value="#{filme.genero}" />
+                                </p:column>
+                                <p:column headerText="Classificação">
+                                    <h:outputText value="#{filme.classificacao}" />
+                                </p:column>
+                                <p:column headerText="Atores" field="ator"  filterStyle="display: none;">
+                                    <h:outputText value="#{filme.ator}" />
+                                </p:column>
+                                <p:column headerText="Sessões" style="width: 15%">                        
+                                    <ui:repeat  value="#{filmeBean.LoadFilmeSessao(filme)}" var="item" >
+                                        <h:outputText id="data" value="#{item.data}"  >
+                                            <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />
+                                        </h:outputText><br/>
+                                    </ui:repeat>
+                                </p:column>   
+
+                            </p:dataTable> 
+                            <div class="botoes">
+                                <p:contextMenu for="tabelafilmes">
+                                    <p:menuitem value="Delete" update="tabelafilmes" icon="pi pi-times"
+                                                action="#{filmeBean.MoverAtualLixeira()}"/>
+                                </p:contextMenu>
+                                <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{filmeBean.MoverAtualLixeira()}" style="" oncomplete="#{filmeBean.reset()}"> <p:confirm
+                                        type="popup"
+                                        header="Deseja realmente remover?"
+                                        message="Remover?"
+                                        icon="pi pi-exclamation-triangle"
+                                        />
+                                </p:commandButton>
+                                &nbsp;
+                                <p:commandButton id="editar" title="Editar"  icon="pi pi-pencil" actionListener="#{filmeBean.LoadFilmeWithSessoes(filme)}" update=":form2:painel-1"/>  
+                                <p:confirmPopup global="true">
+                                    <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                                    <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />
+                                </p:confirmPopup>
+                            </div>
+                        </h:form>     
+                    </div>
+                    <h1>Cadastrar filme</h1>
+                    <div style="display: flex; justify-content: center; margin-top: .5em;">
+                        <h:form id="form2">
+                            <p:panelGrid id="painel-1"  columns="2" style="width: 1100px" >
+                                <p:outputLabel value="Título:" />
+                                <p:inputText value="#{filmeBean.selectedFilme.titulo}"/>
+
+                                <p:outputLabel value="Duração:" />
+                                <p:inputNumber value="#{filmeBean.selectedFilme.duracao}"/>
+
+                                <p:outputLabel value="Nota:" />
+                                <p:inputNumber maxValue="5" minValue="0" value="#{filmeBean.selectedFilme.nota}"/>
+
+                                <p:outputLabel value="Resumo:" />
+                                <p:inputTextarea rows="10" cols="50" value="#{filmeBean.selectedFilme.resumo}" maxlength="500"/>
+
+                                <p:outputLabel value="Gênero:" />
+                                <p:inputText value="#{filmeBean.selectedFilme.genero}" />
+
+                                <p:outputLabel value="Classificação:" />
+                                <p:inputNumber value="#{filmeBean.selectedFilme.classificacao}"/>
+
+                                <p:outputLabel value="Atores:" />
+                                <p:inputText value="#{filmeBean.selectedFilme.ator}"/>                       
+
+                            </p:panelGrid>                 
+                            <div class="botoes">
+                                <p:commandButton id="save" icon="pi pi-save" style="" title="salvar" process="@form" action="#{filmeBean.salvarAtual()}" update=":form1:tabelafilmes"/>                 
+                            </div>
+                        </h:form>
+                    </div> 
                 </div>
-            </f:facet>
-                           
-                        <p:column headerText="ID">
-                            <h:outputText value="#{filme.id}" />
-                        </p:column>
-                        <p:column headerText="Título" field="titulo" filterStyle="display: none;">
-                            <h:outputText value="#{filme.titulo}" />
-                        </p:column>
-                        <p:column headerText="Duração">
-                            <h:outputText value="#{filme.duracao}" />
-                        </p:column>
-                        <p:column headerText="Nota">
-                            <h:outputText value="#{filme.nota}" />
-                        </p:column>
-                        <p:column headerText="Resumo">
-                            <h:outputText value="#{filme.resumo}" />
-                        </p:column>
-                        <p:column headerText="Gênero" field="genero" filterStyle="display: none;">
-                            <h:outputText value="#{filme.genero}" />
-                        </p:column>
-                        <p:column headerText="Classificação">
-                            <h:outputText value="#{filme.classificacao}" />
-                        </p:column>
-                        <p:column headerText="Atores" field="ator"  filterStyle="display: none;">
-                            <h:outputText value="#{filme.ator}" />
-                        </p:column>
-                      <p:column headerText="Sessões" style="width: 15%">                        
-                          <ui:repeat  value="#{filmeBean.LoadFilmeSessao(filme)}" var="item" >
-                                <h:outputText id="data" value="#{item.data}"  >
-                                  <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />
-                              </h:outputText><br/>
-                            </ui:repeat>
-                        </p:column>   
-                                              
-                    </p:dataTable> 
-                    <p:contextMenu for="tabelafilmes">
-            <p:menuitem value="Delete" update="tabelafilmes" icon="pi pi-times"
-                        action="#{filmeBean.MoverAtualLixeira()}"/>
-            
-            </p:contextMenu>
-                        <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{filmeBean.MoverAtualLixeira()}" style="margin-left: 48%" oncomplete="#{filmeBean.reset()}"> <p:confirm
-                            type="popup"
-                            header="Deseja realmente remover?"
-                            message="Remover?"
-                            icon="pi pi-exclamation-triangle"
-                            />
-                      </p:commandButton>
-                        &nbsp;
-                        <p:commandButton id="editar" title="Editar"  icon="pi pi-pencil" actionListener="#{filmeBean.LoadFilmeWithSessoes(filme)}" update=":form2:painel-1"/>  
-                      <p:confirmPopup global="true">
-            <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
-            <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />
-        </p:confirmPopup>
-                </h:form>     
-                </div>
-                <h1>Cadastrar de Filme</h1>
-                
-                <div style="display: flex; justify-content: center; margin-top: .5em;">
-                <h:form id="form2" >
-                    <p:panelGrid id="painel-1"  columns="2" style="width: auto" >
-                        <p:outputLabel value="Título:" />
-                        <p:inputText value="#{filmeBean.selectedFilme.titulo}"/>
-                        
-                        <p:outputLabel value="Duração:" />
-                        <p:inputNumber value="#{filmeBean.selectedFilme.duracao}"/>
-                        
-                        <p:outputLabel value="Nota:" />
-                        <p:inputNumber maxValue="5" minValue="0" value="#{filmeBean.selectedFilme.nota}"/>
-                        
-                        <p:outputLabel value="Resumo:" />
-                        <p:inputTextarea rows="10" cols="50" value="#{filmeBean.selectedFilme.resumo}" maxlength="500"/>
-                        
-                        <p:outputLabel value="Gênero:" />
-                        <p:inputText value="#{filmeBean.selectedFilme.genero}" />
-                        
-                        <p:outputLabel value="Classificação:" />
-                        <p:inputNumber value="#{filmeBean.selectedFilme.classificacao}"/>
-                        
-                        <p:outputLabel value="Atores:" />
-                        <p:inputText value="#{filmeBean.selectedFilme.ator}"/>                       
-                        
-                    </p:panelGrid>                 
-                    <p:commandButton id="save" icon="pi pi-save" style="margin-left: 55%" title="salvar" process="@form" action="#{filmeBean.salvarAtual()}" update=":form1:tabelafilmes"/>                 
-                </h:form>
-                 </div> 
             </ui:define>
         </ui:composition>
     </h:body>

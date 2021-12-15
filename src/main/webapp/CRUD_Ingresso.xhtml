@@ -1,108 +1,109 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Cadastro de Ingressos</title>
     </h:head>
     <h:body>
         <ui:composition template ="./WEB-INF/template/template.xhtml">
-           
             <ui:define name="main">
-                <h1>Ingressos no Banco da Dados</h1>
-                <div>
-                    <h:form id="form1">
-                    <p:dataTable id="tabelaingressos" widgetVar="tabelaingressos" var="ingresso" value="#{ingressoBean.allIngresso}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{ingresso.id}" selectionMode="single" selection="#{ingressoBean.selectedIngresso}">
-                        <f:facet name="header">
-                <div id="searchfilme" class="search">
-                    <span>Selecione uma opção e pressione deletar ou clique com o botão direito</span>
-                    
-                    <span class="filter-container ui-input-icon-left"  style="margin-left: 550px">
-                            <i class="pi pi-search" />
-                            <p:inputText 
-                                id="globalFilter" 
-                                onkeyup="PF('tabelaingressos').filter()" 
-                                placeholder="Pesquisar"/>
-                    </span>
+                <div class="corpo">
+                    <h1>Ingressos cadastrados</h1>
+                    <div>
+                        <h:form id="form1">
+                            <p:dataTable id="tabelaingressos" widgetVar="tabelaingressos" var="ingresso" value="#{ingressoBean.allIngresso}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{ingresso.id}" selectionMode="single" selection="#{ingressoBean.selectedIngresso}">
+                                <f:facet name="header">
+                                    <div id="searchfilme" class="search">
+                                        <span>Selecione uma opção e pressione deletar ou clique com o botão direito</span>
+
+                                        <span class="filter-container ui-input-icon-left"  style="margin-left: 320px">
+                                            <i class="pi pi-search" />
+                                            <p:inputText 
+                                                id="globalFilter" 
+                                                onkeyup="PF('tabelaingressos').filter()" 
+                                                placeholder="Pesquisar"/>
+                                        </span>
+                                    </div>
+                                </f:facet>
+                                <p:column headerText="ID">
+                                    <h:outputText value="#{ingresso.id}" />
+                                </p:column>
+                                <p:column headerText="Forma de Pagamento">
+                                    <h:outputText value="#{ingresso.formasDePagamento.tipoPagamento}" />
+                                </p:column>
+                                <p:column headerText="Usuário">
+                                    <h:outputText value="#{ingresso.usuario.nome}" />
+                                </p:column>
+                                <p:column headerText="Sessão">
+                                    <h:outputText id="data" value="#{ingresso.sessao.data}"  >
+                                        <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />
+                                    </h:outputText><br/>
+                                </p:column>
+                            </p:dataTable> 
+                            <div class="botoes">
+                                <p:contextMenu for="tabelaingressos">
+                                    <p:menuitem value="Delete" update="tabelaingressos" icon="pi pi-times"
+                                                action="#{ingressoBean.MoverAtualLixeira()}"/>
+
+                                </p:contextMenu>
+                                <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{ingressoBean.MoverAtualLixeira()}" oncomplete="#{filmeBean.reset()}"> <p:confirm
+                                        type="popup"
+                                        header="Deseja realmente remover?"
+                                        message="Remover?"
+                                        icon="pi pi-exclamation-triangle"
+                                        />
+                                </p:commandButton>
+                                &nbsp;
+                                <p:commandButton id="editar" title="Editar" process="@form" icon="pi pi-pencil" actionListener="#{ingressoBean.loadIngresso(ingresso)}" update=":form2:painel-1"/> 
+                                <p:confirmPopup global="true">
+                                    <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                                    <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />
+                                </p:confirmPopup>
+                            </div>
+                        </h:form>     
+                    </div>
+                    <h1>Cadastrar ingresso</h1>
+                    <div style="display: flex; justify-content: center; margin-top: .5em;">
+                        <h:form id="form2" >
+                            <p:panelGrid id="painel-1"  columns="2" style="width: 1100px">
+                                <p:outputLabel for="selectfp" value="Forma de Pagamento:" />
+                                <p:selectOneMenu id="selectfp" value="#{ingressoBean.selectedIngresso.formasDePagamento}" converter="formasdepagamentoConverter">
+                                    <f:selectItem itemLabel="Selecione uma forma"/>
+                                    <f:selectItems value="#{formasDePagamentoBean.allFormasDePagamento}" itemLabel="#{forma.tipoPagamento}" var="forma" itemValue="#{forma}"/>
+                                    <f:attribute 
+                                        name="collectionType" 
+                                        value="java.util.ArrayList" />
+                                </p:selectOneMenu>
+                                <p:outputLabel for="selectusuario" value="Usuário:" />
+                                <p:selectOneMenu id="selectusuario" value="#{ingressoBean.selectedIngresso.usuario}" converter="usuarioConverter">
+                                    <f:selectItem itemLabel="Selecione um usuario"/>
+                                    <f:selectItems value="#{usuarioBean.allUsuario}" itemLabel="#{usuario.nome}" var="usuario" itemValue="#{usuario}"/>
+                                    <f:attribute 
+                                        name="collectionType" 
+                                        value="java.util.ArrayList" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel for="selectsessao" value="Sessão:" />
+                                <p:selectOneMenu id="selectsessao" value="#{ingressoBean.selectedIngresso.sessao}" converter="sessaoConverter">
+                                    <f:selectItem itemLabel="Selecione um sessão"/>
+                                    <f:selectItems value="#{sessaoBean.allSessao}" itemLabel="#{sessao.data}" var="sessao" itemValue="#{sesssao}"/> 
+                                    <f:attribute 
+                                        name="collectionType" 
+                                        value="java.util.ArrayList" />
+                                </p:selectOneMenu>
+
+                            </p:panelGrid>                 
+                            <div class="botoes">
+                                <p:commandButton id="save" icon="pi pi-plus" title="salvar" process="@form" action="#{ingressoBean.salvarAtual()}"/> 
+                            </div>                
+                        </h:form>
+                    </div> 
                 </div>
-            </f:facet>
-                        <p:column headerText="ID">
-                            <h:outputText value="#{ingresso.id}" />
-                        </p:column>
-                        <p:column headerText="Forma de Pagamento">
-                            <h:outputText value="#{ingresso.formasDePagamento.tipoPagamento}" />
-                        </p:column>
-                        <p:column headerText="Usuário">
-                            <h:outputText value="#{ingresso.usuario.nome}" />
-                        </p:column>
-                        <p:column headerText="Sessão">
-                            <h:outputText id="data" value="#{ingresso.sessao.data}"  >
-                                  <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />
-                              </h:outputText><br/>
-                        </p:column>
-                        
-                                                                      
-                    </p:dataTable> 
-                    <p:contextMenu for="tabelaingressos">
-            <p:menuitem value="Delete" update="tabelaingressos" icon="pi pi-times"
-                        action="#{ingressoBean.MoverAtualLixeira()}"/>
-            
-            </p:contextMenu>
-                    <p:commandButton id="deletar" icon="pi pi-trash"  title="Deletar"  action="#{ingressoBean.MoverAtualLixeira()}" style="margin-left: 48%" oncomplete="#{filmeBean.reset()}"> <p:confirm
-                            type="popup"
-                            header="Deseja realmente remover?"
-                            message="Remover?"
-                            icon="pi pi-exclamation-triangle"
-                            />
-                      </p:commandButton>
-                        &nbsp;
-                        <p:commandButton id="editar" title="Editar" process="@form" icon="pi pi-pencil" actionListener="#{ingressoBean.loadIngresso(ingresso)}" update=":form2:painel-1"/> 
-                      <p:confirmPopup global="true">
-            <p:commandButton value="Não" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
-            <p:commandButton value="Sim" type="button" styleClass="ui-confirm-popup-yes" />
-        </p:confirmPopup>
-                </h:form>     
-                </div>
-                <h1>Cadastrar de Ingresso</h1>
-                <div style="display: flex; justify-content: center; margin-top: .5em;">
-                <h:form id="form2" >
-                    <p:panelGrid id="painel-1"  columns="2">
-                     <p:outputLabel for="selectfp" value="Forma de Pagamento:" />
-                     <p:selectOneMenu id="selectfp" value="#{ingressoBean.selectedIngresso.formasDePagamento}" converter="formasdepagamentoConverter">
-                            <f:selectItem itemLabel="Selecione uma forma"/>
-                            <f:selectItems value="#{formasDePagamentoBean.allFormasDePagamento}" itemLabel="#{forma.tipoPagamento}" var="forma" itemValue="#{forma}"/>
-                            <f:attribute 
-                                    name="collectionType" 
-                                    value="java.util.ArrayList" />
-                        </p:selectOneMenu>
-                     <p:outputLabel for="selectusuario" value="Usuário:" />
-                     <p:selectOneMenu id="selectusuario" value="#{ingressoBean.selectedIngresso.usuario}" converter="usuarioConverter">
-                            <f:selectItem itemLabel="Selecione um usuario"/>
-                            <f:selectItems value="#{usuarioBean.allUsuario}" itemLabel="#{usuario.nome}" var="usuario" itemValue="#{usuario}"/>
-                            <f:attribute 
-                                    name="collectionType" 
-                                    value="java.util.ArrayList" />
-                        </p:selectOneMenu>
-                     
-                     <p:outputLabel for="selectsessao" value="Sessão:" />
-                     <p:selectOneMenu id="selectsessao" value="#{ingressoBean.selectedIngresso.sessao}" converter="sessaoConverter">
-                            <f:selectItem itemLabel="Selecione um sessão"/>
-                            <f:selectItems value="#{sessaoBean.allSessao}" itemLabel="#{sessao.data}" var="sessao" itemValue="#{sesssao}"/> 
-                            <f:attribute 
-                                    name="collectionType" 
-                                    value="java.util.ArrayList" />
-                        </p:selectOneMenu>
-                     
-                     
-                     
-                    </p:panelGrid>                 
-                    <p:commandButton id="save" icon="pi pi-plus" style="margin-left: 55%" title="salvar" process="@form" action="#{ingressoBean.salvarAtual()}"/>                 
-                </h:form>
-                 </div> 
             </ui:define>
         </ui:composition>
     </h:body>
