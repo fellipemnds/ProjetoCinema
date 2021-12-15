@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Resultado de Pesquisa</title>
+    </h:head>
+    <h:body>
+        <ui:composition template ="./WEB-INF/template/template.xhtml">
+            <ui:define name="main">
+                <div>
+                    <h:form>
+                        <p:dataTable id="tabelafilmes" widgetVar="tabelafilmes" var="filme" value="#{filmeBean.allFilme}" paginator="true" resizableColumns="true" scrollHeight="150" rowKey="#{filme.id}" selectionMode="single" selection="#{filmeBean.selectedFilme}"  reflow="true" filteredValue="#{filmeBean.filteredFilme}" size="small" style="width: auto">
+            <f:facet name="header">
+                <div id="searchfilme" class="search">
+                  
+                    
+                    <span class="filter-container ui-input-icon-left"  style="margin-left: 550px">
+                            <i class="pi pi-search" />
+                            <p:inputText 
+                                id="globalFilter" 
+                                onkeyup="PF('tabelafilmes').filter()" 
+                                placeholder="Pesquisar"/>
+                    </span>
+                </div>
+            </f:facet>
+                            <p:column headerText="Título" field="titulo" filterStyle="display: none;">
+                           <p:graphicImage url="images/#{filme.titulo}.jpg"/>
+                        </p:column>
+                           
+                        <p:column headerText="Título" field="titulo" filterStyle="display: none;">
+                            <h:outputText value="#{filme.titulo}" />
+                        </p:column>
+                        <p:column headerText="Duração">
+                            <h:outputText value="#{filme.duracao}" />
+                        </p:column>
+                        <p:column headerText="Nota">
+                            <h:outputText value="#{filme.nota}" />
+                        </p:column>
+                        <p:column headerText="Resumo">
+                            <h:outputText value="#{filme.resumo}" />
+                        </p:column>
+                        <p:column headerText="Gênero" field="genero" filterStyle="display: none;">
+                            <h:outputText value="#{filme.genero}" />
+                        </p:column>
+                        <p:column headerText="Classificação">
+                            <h:outputText value="#{filme.classificacao}" />
+                        </p:column>
+                        <p:column headerText="Atores" field="ator"  filterStyle="display: none;">
+                            <h:outputText value="#{filme.ator}" />
+                        </p:column>
+                      <p:column headerText="Sessões" style="width: 15%">                        
+                          <ui:repeat  value="#{filmeBean.LoadFilmeSessao(filme)}" var="item" >
+                                <h:outputText id="data" value="#{item.data}"  >
+                                  <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />
+                              </h:outputText><br/>
+                            </ui:repeat>
+                        </p:column>   
+                                              
+                    </p:dataTable>
+                        
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

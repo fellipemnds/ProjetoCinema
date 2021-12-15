@@ -21,8 +21,6 @@ import javax.inject.Inject;
  * @author Gealisson
  */
 @Named(value = "filmeBean")
-//@Dependent
-//@ViewScoped
 @SessionScoped
 public class FilmeBean implements Serializable{
 
@@ -33,7 +31,7 @@ public class FilmeBean implements Serializable{
     private Long selectedFilmeId;
     private List<Filme> allFilme;
     private List<Filme> filteredFilme;
-   
+    private String pesquisa;
     
     public FilmeBean() {
         
@@ -44,6 +42,17 @@ public class FilmeBean implements Serializable{
             selectedFilme = new Filme();
         }
     }
+
+    public String getPesquisa() {
+        return pesquisa;
+    }
+
+    public void setPesquisa(String pesquisa) {
+        this.pesquisa = pesquisa;
+    }
+    
+    
+    
     public Filme getSelectedFilme() {
         return selectedFilme;
     }
@@ -127,6 +136,28 @@ public class FilmeBean implements Serializable{
         } else {
             return null;
         }
+    }
+    public Filme findFilme(){
+        String titulo = getPesquisa();
+        System.out.println("titulo: "+titulo);
+        if(titulo==null){
+            System.out.println("titulo nulo");
+            return null;
+        }else{
+            Filme findfilme = filmeservice.findFilme(titulo);
+            System.out.println("filme: "+findfilme);
+            selectedFilme =findfilme;
+            return selectedFilme;
+        }
+    }
+    public Filme pesquisaFilme(String pesquisa){
+        for(Filme f:allFilme){
+            if(f.getTitulo().equals(pesquisa)){
+                return f;
+            } else {
+            }
+        }
+        return null;
     }
     
 }

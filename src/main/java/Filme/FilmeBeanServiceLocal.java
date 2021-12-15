@@ -24,5 +24,7 @@ public interface FilmeBeanServiceLocal {
     Filme loadFilmeByIdWithSessoes(Long id);
 
     Filme loadFilmeWithSessao(Long id);
+
+    Filme findFilme(String titulo);
     
 }

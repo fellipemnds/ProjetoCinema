@@ -15,34 +15,8 @@
         <ui:composition template="./WEB-INF/template/template.xhtml">
             <ui:define name="main">
                 <div id="conteudo">
-       <!--
-                   <div id="detalhes_filme">
-                        <img class="poster" src="images/Encanto.jpg"/>   
-                        <div id="info">
-                            <div id="titulo">
-                                <h2>Encanto</h2>
-                                <h3>Encanto</h3>
-                                <h4>103min</h4>
-                            </div>
-                            <div id="categoria">
-                                <p id="genero">Animação</p>
-                                <p id="idade">L</p>
-                            </div>
-                            <div class="div_sobre">
-                                <h3>Sinopse e detalhes</h3>
-                                <p class="paragrafo_sobre"> A extraordinária família Madrigal 
-                                    vive escondida nas montanhas da Colômbia, em uma casa mágica, 
-                                    dentro de uma cidade vibrante, um lugar maravilhoso conhecido 
-                                    como um Encanto. A magia deste Encanto abençoou todos os meninos 
-                                    e meninas da família com um dom único, desde superforça até o 
-                                    poder de curar. Todos, exceto Mirabel. Mas, quando ela descobre 
-                                    que a magia que cerca o Encanto está em perigo, Mirabel decide 
-                                    que ela, a única Madrigal sem poderes mágicos, pode ser a última 
-                                    esperança de sua família excepcional. </p>
-                            </div>
-                        </div>
-                    </div>-->
-       <h:form>           
+       
+    <h:form>           
            <h1 style="margin-top:0">Detalhes de #{filmeBean.selectedFilme.titulo}</h1>
               
     <p:panelGrid columns="2" rendered="#{not empty filmeBean.selectedFilme}" columnClasses="label,value" >
@@ -58,12 +32,18 @@
         
         <h:outputText value="Resumo:"/>
         <h:outputText value="#{filmeBean.selectedFilme.resumo}"/>
+        
+     <h:outputText value="Sessões:"/>
+        <ui:repeat  value="#{filmeBean.LoadFilmeSessao(filmeBean.selectedFilme)}" var="item" >
+            <h:outputText id="data" value="#{item.data}"  >
+                 <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" />                           
+            </h:outputText><br/>
+        </ui:repeat>
 
     </p:panelGrid>
           
        </h:form>
-
-                    </div>
+                </div>
          </ui:define>
         </ui:composition>
     </h:body>

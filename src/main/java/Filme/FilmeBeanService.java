@@ -26,20 +26,21 @@ public class FilmeBeanService implements FilmeBeanServiceLocal {
     public void Salvar(Filme filme) {
         if (entityManager.contains(filme)) {
             // Update attached -- Ever used??
-            System.out.println("FilmeServiceBean::save[U].task => " + filme);
+            System.out.println("FilmeServiceBean::save[U].filme => " + filme);
             entityManager.persist(filme);
         } else if (filme.getId() != null) {
             // Detached entity
-            System.out.println("FilmeServiceBean::save[U'].task => " + filme);
+            System.out.println("FilmeServiceBean::save[U'].filme => " + filme);
             entityManager.merge(filme);
         } else {
             // Create new
-            System.out.println("FilmeServiceBean::save[S].task => " + filme);
+            System.out.println("FilmeServiceBean::save[S].filme => " + filme);
             
             // entityManager.persist(filme);
             // Forces the merge to all related entities
             // (CascadeType.ALL) and avoids an exception.
             // However performance degrades. Review required.
+            
             entityManager.merge(filme);
     }
     
@@ -77,6 +78,16 @@ public class FilmeBeanService implements FilmeBeanServiceLocal {
                         "filme.loadFilmeWithSession",
                         Filme.class)
                 .setParameter("id", id)
+                .getSingleResult();
+    }
+
+    @Override
+    public Filme findFilme(String titulo) {
+        return entityManager
+                .createNamedQuery(
+                        "filme.findFilmeByName",
+                        Filme.class)
+                .setParameter("titulo", titulo)
                 .getSingleResult();
     }
     

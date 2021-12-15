@@ -35,7 +35,7 @@
                         <p:column headerText="ID">
                             <h:outputText value="#{filme.id}" />
                         </p:column>
-        <p:column headerText="Título" field="titulo" filterStyle="display: none;">
+                        <p:column headerText="Título" field="titulo" filterStyle="display: none;">
                             <h:outputText value="#{filme.titulo}" />
                         </p:column>
                         <p:column headerText="Duração">
@@ -47,7 +47,7 @@
                         <p:column headerText="Resumo">
                             <h:outputText value="#{filme.resumo}" />
                         </p:column>
-        <p:column headerText="Gênero" field="genero" filterStyle="display: none;">
+                        <p:column headerText="Gênero" field="genero" filterStyle="display: none;">
                             <h:outputText value="#{filme.genero}" />
                         </p:column>
                         <p:column headerText="Classificação">
@@ -97,7 +97,7 @@
                         <p:inputNumber value="#{filmeBean.selectedFilme.duracao}"/>
                         
                         <p:outputLabel value="Nota:" />
-                        <p:inputNumber value="#{filmeBean.selectedFilme.nota}"/>
+                        <p:inputNumber maxValue="5" minValue="0" value="#{filmeBean.selectedFilme.nota}"/>
                         
                         <p:outputLabel value="Resumo:" />
                         <p:inputTextarea rows="10" cols="50" value="#{filmeBean.selectedFilme.resumo}" maxlength="500"/>
@@ -109,26 +109,7 @@
                         <p:inputNumber value="#{filmeBean.selectedFilme.classificacao}"/>
                         
                         <p:outputLabel value="Atores:" />
-                        <p:inputText value="#{filmeBean.selectedFilme.ator}"/>
-                        
-                    <!-- <p:outputLabel value="Sessões:" />
-                        <p:scrollPanel
-                            style="max-height: 10em;">
-                            <p:selectManyCheckbox
-                                id="sessoes"
-                                value="#{filmeBean.selectedFilme.sessoes}"
-                                converter="sessaoConverter"
-                                layout="pageDirection" >
-                                <f:selectItems
-                                    value="#{sessaoBean.allSessao}"
-                                    var="sessao"
-                                    itemLabel="#{sessao.data}"
-                                    itemValue="#{sessao}" />
-                                <f:attribute 
-                                    name="collectionType" 
-                                    value="java.util.ArrayList" />
-                            </p:selectManyCheckbox>
-                        </p:scrollPanel>    -->               
+                        <p:inputText value="#{filmeBean.selectedFilme.ator}"/>                       
                         
                     </p:panelGrid>                 
                     <p:commandButton id="save" icon="pi pi-save" style="margin-left: 55%" title="salvar" process="@form" action="#{filmeBean.salvarAtual()}" update=":form1:tabelafilmes"/>                 

@@ -48,6 +48,12 @@ import javax.persistence.Table;
          + "left join fetch f.sessoes "
          + "where f.lixo = false and f.id = :id "
          + "order by f.id"
+ ),
+ @NamedQuery(
+         name = "filme.findFilmeByName",
+         query = "select f from filme f "      
+         + "where f.lixo = false and f.titulo = :titulo "
+        // + "order by f.id"
  )
         
 }
@@ -56,7 +62,7 @@ public class Filme implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)//IDENTITY nao funciona com dados no banco de dados, gera problemas de constraints 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//IDENTITY nao funciona com dados no banco de dados, gera problemas de constraints 
     private Long id;
     private String titulo;
     private int duracao;    
@@ -138,14 +144,13 @@ public class Filme implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    @Column(nullable = true)
+    
     @OneToMany(mappedBy = "filme",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Sessao> sessoes;
     
     public Filme() {
-        super();
         lixo= false;
         sessoes= new ArrayList<>();
     }

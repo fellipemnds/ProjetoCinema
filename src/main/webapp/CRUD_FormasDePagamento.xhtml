@@ -73,7 +73,7 @@
                         <p:outputLabel value="Tipo de Pagamento:" />
                         <p:inputText value="#{formasDePagamentoBean.selectedFormasDePagamento.tipoPagamento}"/> 
                         <p:outputLabel value="Valor:" />
-                        <p:inputNumber value="#{formasDePagamentoBean.selectedFormasDePagamento.valor}"/> 
+                        <p:inputNumber symbol="R$ " symbolPosition="p" decimalSeparator="," thousandSeparator="." value="#{formasDePagamentoBean.selectedFormasDePagamento.valor}" /> 
                         <p:outputLabel for="selectcartao" value="Cartão:" />
                         <p:selectOneMenu id="selectcartao" value="#{formasDePagamentoBean.selectedFormasDePagamento.cartao}" converter="cartaoConverter">
                             <f:selectItem itemLabel="Selecione um cartão"/>

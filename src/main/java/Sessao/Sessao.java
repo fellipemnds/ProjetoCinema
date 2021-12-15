@@ -51,7 +51,7 @@ import javax.persistence.Table;
             name = "sessao.findSessaoByFilme",
             query = "select s from sessao s "
             + "left join fetch s.filme "
-            + "where s.lixo = false and s.id = :id "
+            + "where s.lixo = false and s.filme.id = :id "
             + "order by s.id"
     ),
     @NamedQuery(
@@ -75,7 +75,7 @@ import javax.persistence.Table;
 public class Sessao implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tipo;
     @Column(columnDefinition = "TIMESTAMP")
@@ -119,7 +119,7 @@ public class Sessao implements Serializable{
         lixo= false;
         ingressos = new ArrayList<>();
     }
-
+    
     @ManyToOne(fetch = FetchType.LAZY, // padrão
             cascade = CascadeType.ALL)
     @JoinColumn(name = "filme_id")
