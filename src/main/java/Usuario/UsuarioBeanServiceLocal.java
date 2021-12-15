@@ -6,6 +6,7 @@
 package Usuario;
 
 import java.util.List;
+import java.util.Optional;
 import javax.ejb.Local;
 
 /**
@@ -24,4 +25,6 @@ public interface UsuarioBeanServiceLocal {
 
     Usuario findUsuarioById(Long id);
     
+    public Usuario createUser(String name, String username,String email, String telefone, String password, String group, Boolean lixo);
+    public Optional<Usuario> getUser(String username);
 }

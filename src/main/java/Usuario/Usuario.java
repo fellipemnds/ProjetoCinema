@@ -9,6 +9,7 @@ import Ingresso.Ingresso;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,6 +40,10 @@ import javax.persistence.Table;
     @NamedQuery(
             name="usuario.findUsuarioById",
             query = "select u from usuario u " + "where u.lixo = false and u.id=:id " + "order by u.id"
+    ),
+    @NamedQuery(
+            name="usuario.findUsuarioByName",
+            query = "select u from usuario u " + "where u.lixo = false and u.username=:username "
     )
     
 }
@@ -47,18 +52,40 @@ public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "name", nullable = false)
     private  String nome;
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
+    @Column(name = "email", nullable = false)
     private String email;
+    @Column(name = "telefone", nullable = false)
     private String telefone;
+    @Column(name = "user_password", nullable = false)
     private String senha;
-
-    private boolean lixo;//Guisso usa esse sistema para remover da exibicao
+    @Column(name = "user_group", nullable = false)
+    private String group;
+    private boolean lixo;
 
     public boolean isLixo() {
         return lixo;
     }
-
+    
+    public Usuario(String name, String username, String email, String telefone, String password, String group, Boolean lixo) {
+        this.nome = name;
+        this.username = username;
+        this.senha = password;
+        this.group = group;
+        this.email= email;
+        this.telefone=telefone;
+        this.lixo = lixo;
+    }
+    public Usuario(){
+        
+    }
+    
+    
     public void setLixo(boolean lixo) {
         this.lixo = lixo;
     }
@@ -99,14 +126,26 @@ public class Usuario implements Serializable {
         return senha;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
     
-    public Usuario()
-    {
-        super();
-        setLixo(false);
+    
+    
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
     @Override
     public int hashCode() {
@@ -145,7 +184,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "io.github.fellipemnds.jakartaee8.projetocinema.Usuario[ id=" + id + " ]";
+        return "Usuario[ id=" + id + " ]";
     }
     
     
