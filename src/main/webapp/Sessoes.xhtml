@@ -56,7 +56,10 @@
                     <div >
                 <div>
                    <div class="p-mb-3">
-                        <p:graphicImage url="images/#{sessaoBean.findFilmeBySessao(sessao).titulo}.jpg" styleClass="product-image"/>
+                        <p:commandLink oncomplete="location.href='filme.xhtml';" >
+                        <p:graphicImage url="images/#{sessaoBean.findFilmeBySessao(sessao).titulo}.jpg" />
+                        <f:setPropertyActionListener for="sessoes" value="#{sessao.filme}" target="#{filmeBean.selectedFilme}"/>
+                         </p:commandLink>
                     </div>
                     <div>
                         <h3 class="p-mb-1">#{sessaoBean.findFilmeBySessao(sessao).titulo}</h3>

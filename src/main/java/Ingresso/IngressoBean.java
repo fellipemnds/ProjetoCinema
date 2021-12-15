@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
@@ -82,6 +81,10 @@ public class IngressoBean implements Serializable{
     public String salvarAtual(){
         salvar(selectedIngresso);
         return "CRUD_Ingresso?faces-redirect=true";
+    }
+    public String salvarCurrent(){
+        salvar(selectedIngresso);
+        return "Pagamento?faces-redirect=true";
     }
     public List<Ingresso> findAll(){
         return ingressoservice.findAll();

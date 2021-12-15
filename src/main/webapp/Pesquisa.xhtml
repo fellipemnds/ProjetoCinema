@@ -27,6 +27,7 @@
                     </span>
                 </div>
             </f:facet>
+                            <p:ajax event="rowSelect" listener="#{filmeBean.selectedFilme}"  oncomplete="location.href='filme.xhtml';"/>
                             <p:column headerText="Título" field="titulo" filterStyle="display: none;">
                            <p:graphicImage url="images/#{filme.titulo}.jpg"/>
                         </p:column>
