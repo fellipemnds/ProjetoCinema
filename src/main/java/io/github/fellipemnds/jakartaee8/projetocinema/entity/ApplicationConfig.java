@@ -11,9 +11,9 @@ import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
 @Named
 @DatabaseIdentityStoreDefinition(
         dataSourceLookup = "java:/SistemaDS",
-        callerQuery = "select user_password from tbl_usuario "
+        callerQuery = "select user_password from usuario "
         + "where username = ?",
-        groupsQuery = "select user_group from tbl_usuario "
+        groupsQuery = "select user_group from usuario "
         + "where username = ?",
         hashAlgorithm = Pbkdf2PasswordHash.class,
         hashAlgorithmParameters = {

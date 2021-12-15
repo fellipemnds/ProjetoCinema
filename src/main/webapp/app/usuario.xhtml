@@ -16,15 +16,7 @@
                 <ui:define name="main">
             <h3>This is your user profile!</h3>
             <p:panel>
-                <p:dataList 
-                    value="#{userController.currentQualities}" 
-                    var="quality" 
-                    type="ordered">
-                    <f:facet name="header">
-                        #{userController.currentUser.name}
-                    </f:facet>
-                    #{quality.description}
-                </p:dataList>
+                
                 
                 <f:facet name="footer">
                     <h:form>
