@@ -18,7 +18,7 @@ public class DataInitializer {
     public void execute(@Observes @Initialized(ApplicationScoped.class) Object event) {
         if (dataService.findAll().isEmpty()) {
             Usuario administrador = dataService.createUser("Admin", "admin","email@email.com","(38)111111111" ,"asd", "admin",false);
-            Usuario comum = dataService.createUser("Comum", "comum","email@email.com","(38)111111111", "asd", "user",false);
+            Usuario comum = dataService.createUser("Comum", "user","email@email.com","(38)111111111", "asd", "user",false);
         }
     }
 }
