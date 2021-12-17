@@ -7,6 +7,7 @@ package Usuario;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -125,6 +126,10 @@ public class UsuarioBean implements Serializable{
         }else{
             return null;
         }     
+    }
+    public Optional<Usuario> findUsuario(String nome){
+        Optional<Usuario> usuario = usuarioservice.getUser(nome);
+        return usuario;
     }
     
     

@@ -5,6 +5,7 @@
  */
 package Ingresso;
 
+import Usuario.Usuario;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -84,7 +85,7 @@ public class IngressoBean implements Serializable{
     }
     public String salvarCurrent(){
         salvar(selectedIngresso);
-        return "Pagamento?faces-redirect=true";
+        return null;
     }
     public List<Ingresso> findAll(){
         return ingressoservice.findAll();
@@ -113,9 +114,12 @@ public class IngressoBean implements Serializable{
             return null;
         }
         
+    }
+    public void AutoDefineUser(Usuario usuario){
+        
+        selectedIngresso.setUsuario(usuario);
         
     }
-    
     
     
 }

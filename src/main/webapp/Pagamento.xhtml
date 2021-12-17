@@ -25,6 +25,7 @@
                                     name="collectionType" 
                                     value="java.util.ArrayList" />
                         </p:selectOneMenu>
+                     
                      <p:outputLabel for="selectusuario" value="Usuário:" />
                      <p:selectOneMenu id="selectusuario" value="#{ingressoBean.selectedIngresso.usuario}" converter="usuarioConverter">
                             <f:selectItem itemLabel="Selecione um usuario"/>
@@ -37,16 +38,19 @@
                      <p:outputLabel for="selectsessao" value="Sessão:" />
                      <p:selectOneMenu id="selectsessao" value="#{ingressoBean.selectedIngresso.sessao}" converter="sessaoConverter">
                             <f:selectItem itemLabel="Selecione um sessão"/>
-                            <f:selectItems value="#{sessaoBean.allSessao}" itemLabel="#{sessao.data}" var="sessao" itemValue="#{sesssao}"/> 
+                            <f:selectItems value="#{filmeBean.selectedFilme.sessoes}" itemLabel="#{sessao.data}" var="sessao" itemValue="#{sesssao}"/> 
                             <f:attribute 
                                     name="collectionType" 
                                     value="java.util.ArrayList" />
                         </p:selectOneMenu>
                      
-                     
+                     <p:outputLabel value="Valor Ingresso:"/>
+                     <h:outputText value="R$ 10,00"/>
                      
                     </p:panelGrid>                 
-                     <p:commandButton id="save" icon="pi pi-plus" style="margin-left: 55%" title="salvar" process="@form" action="#{ingressoBean.salvarCurrent()}"/>                 
+                     <p:commandButton id="save" value="Confirmar" style="margin-left: 55%" title="salvar" process="@form" action="#{ingressoBean.selectedIngresso}" oncomplete="location.href='Ingresso.xhtml';">
+                         <p:ajax event="click" listener="#{ingressoBean.salvarCurrent()}" process="@form"/>
+                     </p:commandButton>              
                 </h:form>  
                     
             </ui:define>
