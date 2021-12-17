@@ -9,50 +9,53 @@
         <title>Pagamento de Filme</title>
     </h:head>
     <h:body>
-        
+
         <ui:composition template ="./WEB-INF/template/template.xhtml">
             <ui:define name="main">
-           
-                <h1>Cadastrar Ingresso</h1>
-                
-                 <h:form id="form2" >
-                    <p:panelGrid id="painel-1"  columns="2">
-                     <p:outputLabel for="selectfp" value="Forma de Pagamento:" />
-                     <p:selectOneMenu id="selectfp" value="#{ingressoBean.selectedIngresso.formasDePagamento}" converter="formasdepagamentoConverter">
-                            <f:selectItem itemLabel="Selecione uma forma"/>
-                            <f:selectItems value="#{formasDePagamentoBean.allFormasDePagamento}" itemLabel="#{forma.tipoPagamento}" var="forma" itemValue="#{forma}"/>
-                            <f:attribute 
-                                    name="collectionType" 
-                                    value="java.util.ArrayList" />
-                        </p:selectOneMenu>
-                     
-                     <p:outputLabel for="selectusuario" value="Usuário:" />
-                     <p:selectOneMenu id="selectusuario" value="#{ingressoBean.selectedIngresso.usuario}" converter="usuarioConverter">
-                            <f:selectItem itemLabel="Selecione um usuario"/>
-                            <f:selectItems value="#{usuarioBean.allUsuario}" itemLabel="#{usuario.nome}" var="usuario" itemValue="#{usuario}"/>
-                            <f:attribute 
-                                    name="collectionType" 
-                                    value="java.util.ArrayList" />
-                        </p:selectOneMenu>
-                     
-                     <p:outputLabel for="selectsessao" value="Sessão:" />
-                     <p:selectOneMenu id="selectsessao" value="#{ingressoBean.selectedIngresso.sessao}" converter="sessaoConverter">
-                            <f:selectItem itemLabel="Selecione um sessão"/>
-                            <f:selectItems value="#{filmeBean.selectedFilme.sessoes}" itemLabel="#{sessao.data}" var="sessao" itemValue="#{sesssao}"/> 
-                            <f:attribute 
-                                    name="collectionType" 
-                                    value="java.util.ArrayList" />
-                        </p:selectOneMenu>
-                     
-                     <p:outputLabel value="Valor Ingresso:"/>
-                     <h:outputText value="R$ 10,00"/>
-                     
-                    </p:panelGrid>                 
-                     <p:commandButton id="save" value="Confirmar" style="margin-left: 55%" title="salvar" process="@form" action="#{ingressoBean.selectedIngresso}" oncomplete="location.href='Ingresso.xhtml';">
-                         <p:ajax event="click" listener="#{ingressoBean.salvarCurrent()}" process="@form"/>
-                     </p:commandButton>              
-                </h:form>  
-                    
+                <div id="conteudo">
+
+                    <h1>Cadastrar Ingresso</h1>
+
+                    <h:form id="form2" >
+                        <div id="pagamento">
+                            <p:panelGrid id="painel-1"  columns="2">
+                                <p:outputLabel for="selectfp" value="Forma de Pagamento:" />
+                                <p:selectOneMenu id="selectfp" value="#{ingressoBean.selectedIngresso.formasDePagamento}" converter="formasdepagamentoConverter">
+                                    <f:selectItem itemLabel="Selecione uma forma"/>
+                                    <f:selectItems value="#{formasDePagamentoBean.allFormasDePagamento}" itemLabel="#{forma.tipoPagamento}" var="forma" itemValue="#{forma}"/>
+                                    <f:attribute 
+                                        name="collectionType" 
+                                        value="java.util.ArrayList" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel for="selectusuario" value="Usuário:" />
+                                <p:selectOneMenu id="selectusuario" value="#{ingressoBean.selectedIngresso.usuario}" converter="usuarioConverter">
+                                    <f:selectItem itemLabel="Selecione um usuario"/>
+                                    <f:selectItems value="#{usuarioBean.allUsuario}" itemLabel="#{usuario.nome}" var="usuario" itemValue="#{usuario}"/>
+                                    <f:attribute 
+                                        name="collectionType" 
+                                        value="java.util.ArrayList" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel for="selectsessao" value="Sessão:" />
+                                <p:selectOneMenu id="selectsessao" value="#{ingressoBean.selectedIngresso.sessao}" converter="sessaoConverter">
+                                    <f:selectItem itemLabel="Selecione um sessão"/>
+                                    <f:selectItems value="#{filmeBean.selectedFilme.sessoes}" itemLabel="#{sessao.data}" var="sessao" itemValue="#{sesssao}"/> 
+                                    <f:attribute 
+                                        name="collectionType" 
+                                        value="java.util.ArrayList" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Valor Ingresso:"/>
+                                <h:outputText value="R$ 10,00"/>
+
+                            </p:panelGrid>                 
+                        </div>
+                        <p:commandButton id="save" value="Confirmar" style="margin-left: 36%" title="salvar" process="@form" action="#{ingressoBean.selectedIngresso}" oncomplete="location.href='Ingresso.xhtml';">
+                            <p:ajax event="click" listener="#{ingressoBean.salvarCurrent()}" process="@form"/>
+                        </p:commandButton>              
+                    </h:form>  
+                </div>
             </ui:define>
         </ui:composition>
     </h:body>

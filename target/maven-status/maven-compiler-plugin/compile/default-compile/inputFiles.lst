@@ -1,5 +1,6 @@
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Cartao\CartaoConverter.java
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Usuario\Usuario.java
+D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\controle\LoginController.java
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Usuario\UsuarioBeanServiceLocal.java
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Ingresso\IngressoBeanServiceLocal.java
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Sala\SalaBeanServiceLocal.java
@@ -25,12 +26,16 @@ D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Usuario\UsuarioConverter
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Sala\SalaBean.java
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Sala\SalaBeanService.java
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Filme\FilmeBeanService.java
+D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\controle\UserController.java
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Cartao\CartaoBeanService.java
+D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\io\github\fellipemnds\jakartaee8\projetocinema\entity\ApplicationConfig.java
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Sessao\SessaoBeanServiceLocal.java
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Ingresso\IngressoConverter.java
+D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Usuario\DataInitializer.java
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Cartao\Cartao.java
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Cartao\CartaoBeanServiceLocal.java
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\FormasDePagamento\FormasDPagamentoConverter.java
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Sala\SalaConverter.java
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Sessao\SessaoBeanService.java
+D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\controle\NewUserController.java
 D:\Desenvolvimento Web 2021\ProjetoCinema\src\main\java\Sala\Sala.java

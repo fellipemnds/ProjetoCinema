@@ -39,6 +39,11 @@
         </auth-constraint>
     </security-constraint>
     
+    <login-config> <!-- 2 -->
+    <auth-method>BASIC</auth-method>
+    <realm-name>jaspitest</realm-name>
+  </login-config>
+    
     <security-constraint>
         <display-name>User Role</display-name>
         <web-resource-collection>

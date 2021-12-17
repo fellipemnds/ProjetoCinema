@@ -4,43 +4,48 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html" 
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">">
     <h:head>
         <title>Login</title>
     </h:head>
     <h:body>
         <ui:composition template="/WEB-INF/template/template.xhtml">
-        <ui:define name="main">
-            <p:outputPanel>
-                <div class="ui-g">
-                    <div class="ui-g-4" />
-                    <div class="ui-g-4">
-                        <h3 style="text-align: center;">Login with your credentials</h3>
-                        <h:form id="login">
-                            <p:messages id="messages" globalOnly="true"/>
-                            <h:panelGrid columns="3" cellpadding="3" style="margin: 0 auto;">
-                                <p:outputLabel for="username" value="Username"/>
-                                <p:inputText id="username" value="#{loginController.username}"/>
-                                <p:message for="username"/>
-
-                                <p:outputLabel for="password" value="Senha"/>
-                                <p:inputText id="password" value="#{loginController.password}" type="password"/>
-                                <p:message for="password"/>
-
-                                <p:commandButton 
-                                    id="submit" 
+            <ui:define name="main">
+                <div class="corpo">
+                    <div id="area_login">
+                        <div id="header_login">
+                            <h:graphicImage styleClass="logo_login" value="images/cinema.png" />
+                            <p id="name_login">Cinema</p>
+                        </div>
+                        <div id="conteudo_login">
+                            <p id="texto_login">Preencha os campos para entrar: </p>
+                            <h:form>
+                                <div id="formulario">
+                                    <p:messages id="messages" globalOnly="true"/>
+                                    <h:panelGrid columns="2">            
+                                        <p:inputText id="username" value="#{loginController.username}" styleClass="area_input">
+                                            <f:passThroughAttribute name="placeholder" value="Usuário*" />
+                                        </p:inputText>
+                                        <h:outputText value=""/>
+                                        <p:inputText id="password" value="#{loginController.password}" type="password" styleClass="area_input">
+                                            <f:passThroughAttribute name="placeholder" value="Senha" />
+                                        </p:inputText> 
+                                    </h:panelGrid>
+                                </div>
+                                <div id="botao_login">
+                                    <p:commandButton  
                                     update="@form" 
                                     value="Login" 
                                     action="#{loginController.execute}" 
                                     ajax="false"/>
-                            </h:panelGrid>
-                        </h:form>
-                    </div>   
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
                 </div>
-            </p:outputPanel>
-           
-        </ui:define>
-    </ui:composition>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

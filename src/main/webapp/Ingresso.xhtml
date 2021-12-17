@@ -13,25 +13,27 @@
             <ui:define name="main">
                 <div id="conteudo">
                     <h:form>
-                        <h1 style="margin-top:0">Detalhes de Ingresso</h1>
-                        <p:panelGrid columns="2" rendered="#{not empty ingressoBean.selectedIngresso}" columnClasses="label,value" style="width: 500px" >
-                        
-                        <h:outputText value="Filme:"/>
-                        <h:outputText value="#{ingressoBean.selectedIngresso.sessao.filme.titulo}"/>
-                        
-                        <h:outputText value="Valor de Ingresso:"/>
-                        <h:outputText value="R$ #{ingressoBean.selectedIngresso.formasDePagamento.valor}"/>
-                        
-                        <h:outputText value="Sessão escolhida:"/>
-                        <h:outputText value="#{ingressoBean.selectedIngresso.sessao.data}">
-                            <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" /> 
-                        </h:outputText>
-                        
-                        <h:outputText value="Forma de Pagamento:"/>
-                        <h:outputText value="#{ingressoBean.selectedIngresso.formasDePagamento.tipoPagamento}"/>
-                    
-                        </p:panelGrid>
-                        <p:commandButton value="Finalizar" action="index?faces-redirect=true" oncomplete="#{filmeBean.reset()}" style="margin-left: 45%"/>
+                        <h1>Detalhes de Ingresso</h1>
+                        <div id="ingresso">
+                            <p:panelGrid columns="2" rendered="#{not empty ingressoBean.selectedIngresso}" columnClasses="label,value" style="width: 500px" >
+
+                                <h:outputText value="Filme:"/>
+                                <h:outputText value="#{ingressoBean.selectedIngresso.sessao.filme.titulo}"/>
+
+                                <h:outputText value="Valor de Ingresso:"/>
+                                <h:outputText value="R$ #{ingressoBean.selectedIngresso.formasDePagamento.valor}"/>
+
+                                <h:outputText value="Sessão escolhida:"/>
+                                <h:outputText value="#{ingressoBean.selectedIngresso.sessao.data}">
+                                    <f:convertDateTime type="localDateTime"  pattern="dd/MM/yyyy HH:mm:ss" /> 
+                                </h:outputText>
+
+                                <h:outputText value="Forma de Pagamento:"/>
+                                <h:outputText value="#{ingressoBean.selectedIngresso.formasDePagamento.tipoPagamento}"/>
+
+                            </p:panelGrid>
+                        </div>
+                        <p:commandButton value="Finalizar" action="index?faces-redirect=true" oncomplete="#{filmeBean.reset()}" style="margin-left: 36%"/>
                     </h:form>     
                 </div>
             </ui:define>

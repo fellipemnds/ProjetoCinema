@@ -174,69 +174,25 @@ main {
 */
 
 #detalhes_filme {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    width: 1100px;
-    margin: 45px 0;
-}
-
-.poster {
-    margin: 0 50px;
-    grid-column-start: 1;
-    grid-column-end: 2;
-}
-
-#info {
-    margin-top: -18px;
-    grid-column-start: 2;
-    grid-column-end: 4;
-
-}
-
-#titulo {
-    line-height: 11px;
-}
-
-#titulo h2 {
-    font-size: 30px;
-}
-
-#titulo h3 {
-    font-size: 18px;
-}
-
-#titulo h4 {
-    font-size: 12px;
-}
-
-#categoria {
-    display: inline-flex;
-    gap: 20px;
-    font-size: 12px;
     margin-bottom: 15px;
 }
 
-#genero {
-    position: relative;
-    border: 1px solid black;
-    border-radius: 5px;
-    align-self: center;
-    padding: 2px;
-    line-height: 15px;
+/*
+* Estilo: Página pagamento.xhtml
+*/
+
+#pagamento {
+    margin-bottom: 15px;
 }
 
-#idade {
-    background-color: green;
-    border-radius: 50%;
-    text-align: center;
-    width: 25px;
-    height: 25px;
-    color: white;
-    font-weight: bold;
-    display: inherit;
-    align-items: center;
-    justify-content: center;
+/*
+* Estilo: Página ingresso.xhtml
+*/
+
+#ingresso {
+    margin-bottom: 15px;
 }
+
 
 /*
 * Estilo do Sobre nós
@@ -332,39 +288,14 @@ main {
     margin-bottom: 8px;
     padding: 10px;
     width: 250px;
-    border-radius: 7px;
+    border-radius: 4px;
     border: 1px solid #eaeaea;
 }
 
-.botao_login {
+#botao_login {
     display: grid;
     margin: 10px auto 15px;
-    padding: 10px 15px;
-    background-color: #2663a5;
-    font-size: 12px;
-    color: #FFFFFF;
-    font-weight: bolder;
-    text-transform: uppercase;
-    border: 0;
-    border-radius: 5px;
-}
-
-.botao_login:hover {
-    background-color: #0e4887;
-}
-
-#cadastrar {
-    display: grid;
-    justify-content: center;
-    font-size: 12px;
-}
-
-#area_cadastro {
-    display: table;
-    margin: 40px auto 56px;
-    border: 1px solid #eaeaea;
-    border-radius: 5px;
-    padding: 0 25px 10px;
+    padding: 0 4px;
 }
 
 /*
