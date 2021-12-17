@@ -241,7 +241,7 @@ main {
 
 #area_login {
     display: table;
-    margin: 11px auto 0;
+    margin: 11px auto 21px;
     border: 1px solid #eaeaea;
     border-radius: 5px;
 }
@@ -322,12 +322,25 @@ footer {
     padding-top: 20px;
     padding-bottom: 20px;
     width: 100%;
-    text-align: center;
 }
 
-#footer_note p {
+#copyright {
+    text-align: center;
     color: #FFF;
     font-weight: bold;
+}
+
+#link_cruds {
+    text-align:  center;
+    font-size: 8px;
+}
+
+#link_cruds a {
+    color: #FFF;
+}
+
+#link_cruds a:hover {
+    text-decoration: underline;
 }
 
 #brand_footer {
